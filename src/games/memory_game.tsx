@@ -31,6 +31,7 @@ export default function MemoryGame() {
   const [bestScore, setBestScore] = useState<number | null>(null);
   const [winSoundPlayed, setWinSoundPlayed] = useState(false);
   const [previewMode, setPreviewMode] = useState(true);
+  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     setCards(createDeck());
@@ -144,10 +145,18 @@ export default function MemoryGame() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800 p-4 flex flex-col items-center">
+     <div
+    className={`min-h-screen transition-all duration-500 flex flex-col items-center justify-center p-4 ${
+      theme === "dark"
+        ? "bg-gray-900 text-white"
+        : theme === "light"
+        ? "bg-gray-100 text-black"
+        : "bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800"
+    }`}
+  >
       
       {/* STATS */}
-      <div className="w-full max-w-5xl flex flex-wrap justify-center gap-3 mb-6">
+        <div className="w-full max-w-6xl flex flex-wrap justify-center gap-4 mb-8">
         <div className="bg-white/80 px-4 py-2 rounded-xl font-semibold">
           🎯 Moves: {moves}
         </div>
@@ -162,7 +171,7 @@ export default function MemoryGame() {
       </div>
 
       {/* GAME */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="w-full max-w-6xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 place-items-center">
         {cards.map((card, index) => {
           // ⭐ FIX: previewMode يفتح كل الكروت أول 3 ثواني
           const isFlipped =
@@ -172,7 +181,7 @@ export default function MemoryGame() {
             <div
               key={card.id}
               onClick={() => handleFlip(index)}
-              className="w-28 h-40 sm:w-32 sm:h-44 md:w-36 md:h-48 cursor-pointer"
+              className="w-full aspect-3/4 max-w-35 max-w-35sm:max-w-40 md:max-w-45 cursor-pointer"
               style={{ perspective: "1000px" }}
             >
               <div
@@ -202,6 +211,7 @@ export default function MemoryGame() {
                 >
                   <img
                     src={card.image}
+                    alt=""
                     className="w-20 h-28 object-contain"
                   />
                 </div>

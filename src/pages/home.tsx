@@ -3,14 +3,49 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 type Lang = "en" | "ar";
 
-export default function Home() {
-  const [lang, setLang] = useState<Lang>("en");
-  const navigate = useNavigate();
+export default function Home({
+  lang,
+  setLang,
+}: {
+  lang: "en" | "ar";
+  setLang: (lang: "en" | "ar") => void;
+}) {
   const isAr = lang === "ar";
+const [theme, setTheme] = useState<string | null>(
+  localStorage.getItem("theme")
+); 
+  const navigate = useNavigate();
 const [, setIsLeaving] = useState(false);
+const [effect, setEffect] = useState<{
+  id: number;
+  x: number;
+  y: number;
+} | null>(null);
+
+const handleLangClick = (lang: "ar" | "en", e: React.MouseEvent<HTMLButtonElement>) => {
+  setLang(lang);
+
+  const rect = e.currentTarget.getBoundingClientRect();
+
+  setEffect({
+    id: Date.now(),
+    x: rect.left + rect.width / 2,
+    y: rect.top + rect.height / 2,
+  });
+
+  setTimeout(() => setEffect(null), 700);
+};
   return (
-<div className="min-h-screen
-  bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800">
+    
+<div
+  className={`min-h-screen transition-all duration-500 ${
+    theme === "dark"
+      ? "bg-gray-900 text-white"
+      : theme === "light"
+      ? "bg-gray-100 text-black"
+      : "bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800"
+  }`}
+>
   <div className="
     absolute
     -top-40
@@ -20,71 +55,86 @@ const [, setIsLeaving] = useState(false);
     bg-white
 animate-pulse
   " />
+
       {/* 🌿 Navbar */}
       <nav className="flex items-center justify-between px-6 py-4">
-
-        <h1 className="text-2xl font-bold text-green-700">
-          Qur'anic Botanic Garden
-        </h1>
-
-        <div className="flex gap-2">
-         <button
-  onClick={() => setLang("ar")}
-  className={`relative px-2 py-1 transition-all duration-300
-  after:content-[''] after:absolute after:left-0 after:-bottom-1
-  after:h-0.5 cursor-pointer after:bg-linear-to-r after:from-green-400 after:to-green-600 after:transition-all after:duration-300
-
-  ${
-    isAr
-      ? "text-green-500 after:w-full"
-      : "text-gray-700 after:w-0 hover:after:w-full"
-  }
-`}
+        <button className="cursor-pointer"
+  onClick={() => {
+    localStorage.removeItem("theme");
+    window.location.reload();
+  }}
 >
-  AR
+  Change Theme
 </button>
-           <button
-  onClick={() => setLang("ar")}
-  className={`relative px-2 py-1  transition-all duration-300
-  after:content-[''] after:absolute after:left-0 after:-bottom-1
-  after:h-0.5 cursor-pointer after:bg-linear-to-r after:from-green-400 after:to-green-600 after:transition-all after:duration-300
-
-  ${
-    isAr
-      ? "text-green-500 after:w-full"
-      : "text-gray-700 after:w-0 hover:after:w-full"
-  }
-`}
->
-  EN
-</button>
-        </div>
       </nav>
 
       {/* Hero */}
       <div className="flex flex-col items-center justify-center text-center mt-24 px-4">
-
+ <h2 className="text-4xl font-bold text-green-800 mb-4">
+          {isAr
+            ? " حديقة القرآن النباتية "
+            : " حديقة القرآن النباتية "}
+        </h2>
         <h2 className="text-4xl font-bold text-green-800 mb-4">
           {isAr
             ? " Qur'anic Botanic Garden "
             : " Qur'anic Botanic Garden "}
         </h2>
 
-      <Link to ={"/plants"}>
-        <button  onClick={() => {
-    setIsLeaving(true);
+     <div className="flex flex-col items-center gap-4 mt-8">
 
-    setTimeout(() => {
-      navigate("/plants");
-    }, 600); // وقت الأنيميشن
-  }} className="mt-8 px-6 py-3 h-16 w-38 bg-green-600 text-white text-2xl rounded-xl hover:bg-green-700 hover:shadow-xl
-active:scale-95
-transition-all
-duration-300 cursor-pointer ">
-          {isAr ? "ابدأ" : "أبدأ"}
-        </button>
-      </Link>  
+
+  <div className="grid grid-col-1 gap-4">
+
+    <button
+ onClick={() => {
+    setLang("ar");
+    navigate("/plants");
+  }}
+
+      className={`w-36 py-2 cursor-pointer bg-white border-2 rounded-lg shadow-md
+      hover:scale-105 transition-all duration-300
+      ${lang === "ar" ? "border-green-600 text-green-600" : "border-gray-300"}`}
+    >
+      العربية
+    </button>
+
+    <button
+         onClick={() => {
+    setLang("en");
+    navigate("/plants");
+  }}
+
+      className={`w-36 py-2 cursor-pointer bg-white border-2 rounded-lg shadow-md
+      hover:scale-105 transition-all duration-300
+      ${lang === "en" ? "border-green-600 text-green-600" : "border-gray-300"}`}
+    >
+      ENGLISH
+    </button>
+
+  </div>
+
+</div>
       </div>
+     {effect && (
+  <div
+    className="pointer-events-none fixed"
+    style={{
+      left: effect.x,
+      top: effect.y,
+      transform: "translate(-50%, -50%)",
+    }}
+  >
+    {/* الحلقة */}
+    <span className="absolute w-10 h-10 border-2 border-green-400 rounded-full animate-ping" />
+
+    {/* نجوم */}
+    <span className="absolute -top-6 text-yellow-400 animate-float1">⭐</span>
+    <span className="absolute top-4 left-6 text-green-400 animate-float2">✨</span>
+    <span className="absolute -left-6 text-yellow-300 animate-float3">⭐</span>
+  </div>
+)}
     </div>
+    
   );
 }

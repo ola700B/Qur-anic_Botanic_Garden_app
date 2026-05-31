@@ -18,24 +18,48 @@ type Plant = {
   popupImage: string;
 };
 
-const plants: Plant[] = [
-  { id: 1, name: "Sidr", image: sidr ,popupImage: sidrPopup},
-  { id: 2, name: "Apple", image: apple,popupImage: applePopup },
-  { id: 3, name: "Olive", image: olive,popupImage: olivePopup },
-  { id: 4, name: "Wheat", image: wheat,popupImage: wheatPopup },
-];
-
-function Plants() {
-  const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
+function Plants({ lang }: { lang: "ar" | "en" }) {
+   const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
   const [selectedSection, setSelectedSection] = useState("");
   const navigate = useNavigate();
-
+  const theme = localStorage.getItem("theme");
+  const plants: Plant[] = [
+  {
+    id: 1,
+    name: lang === "ar" ? "السدر" : "Sidr",
+    image: sidr,
+    popupImage: sidrPopup,
+  },
+  {
+    id: 2,
+    name: lang === "ar" ? "التفاح" : "Apple",
+    image: apple,
+    popupImage: applePopup,
+  },
+  {
+    id: 3,
+    name: lang === "ar" ? "الزيتون" : "Olive",
+    image: olive,
+    popupImage: olivePopup,
+  },
+  {
+    id: 4,
+    name: lang === "ar" ? "القمح" : "Wheat",
+    image: wheat,
+    popupImage: wheatPopup,
+  },
+];
   return (
     
     <div
-      className="min-h-screen
-  bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800 "
-    >
+  className={`min-h-screen transition-all duration-500 ${
+    theme === "dark"
+      ? "bg-gray-900 text-white"
+      : theme === "light"
+      ? "bg-gray-100 text-black"
+      : "bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800"
+  }`}
+>
       <div
         className="
     absolute
@@ -75,13 +99,10 @@ animate-pulse
         ))}
       </div>
       <Link to={"/memory_game"}>
-        <button
-          className="mt-8 mb-5 block mx-auto px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 hover:shadow-xl
-          active:scale-95 transition-all duration-300 cursor-pointer"
-        >
-          Play Games
-        </button>
-      </Link>
+  <button className="mt-8 mb-5 block mx-auto px-6 py-3 bg-green-600 text-white rounded-xl">
+    {lang === "ar" ? "ابدأ اللعب" : "Play Game"}
+  </button>
+</Link>
       {selectedPlant && (
         <div className="fixed inset-0 flex items-center justify-center z-50 animate-fadeIn">
           <div className=" bg-black/30 backdrop-blur-sm  w-[90%] max-w-3xl rounded-3xl p-6 relative animate-modal">
@@ -233,7 +254,7 @@ animate-pulse
     </div>
   </div>
 )}
-<div className="fixed flex justify-between bottom-0 left-0 w-full bg-black/50 h-14 backdrop-blur-md  flex justify-around items-center py-3 text-white z-50">
+<div className="fixed  bottom-0 left-0 w-full bg-black/50 h-14 backdrop-blur-md  flex justify-around items-center py-3 text-white z-50">
   
   {/* BACK */}
   <button
@@ -241,7 +262,9 @@ animate-pulse
     className="flex flex-col items-center ml-4 cursor-pointer gap-1 hover:text-green-300 transition"
   >
     <ArrowLeft size={22} />
-    <span className="text-xs ">Back</span>
+   <span className="text-xs">
+  {lang === "ar" ? "رجوع" : "Back"}
+</span>
   </button>
 
   {/* HOME */}
@@ -250,7 +273,9 @@ animate-pulse
     className="flex flex-col items-center mr-4 cursor-pointer gap-1 hover:text-green-300 transition"
   >
     <Home size={22} />
-    <span className="text-xs">Home</span>
+    <span className="text-xs">
+  {lang === "ar" ? "الرئيسية" : "Home"}
+</span>
   </button>
 
 </div>
