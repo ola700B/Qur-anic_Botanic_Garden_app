@@ -7,7 +7,7 @@ export default function Home() {
   const [lang, setLang] = useState<Lang>("en");
   const navigate = useNavigate();
   const isAr = lang === "ar";
-const [isLeaving, setIsLeaving] = useState(false);
+const [, setIsLeaving] = useState(false);
   return (
 <div className="min-h-screen
   bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800">
