@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-type Lang = "en" | "ar";
 
 export default function Home({
   lang,
@@ -11,30 +9,16 @@ export default function Home({
   setLang: (lang: "en" | "ar") => void;
 }) {
   const isAr = lang === "ar";
-const [theme, setTheme] = useState<string | null>(
+const [theme, ] = useState<string | null>(
   localStorage.getItem("theme")
 ); 
   const navigate = useNavigate();
-const [, setIsLeaving] = useState(false);
-const [effect, setEffect] = useState<{
+const [effect, ] = useState<{
   id: number;
   x: number;
   y: number;
 } | null>(null);
 
-const handleLangClick = (lang: "ar" | "en", e: React.MouseEvent<HTMLButtonElement>) => {
-  setLang(lang);
-
-  const rect = e.currentTarget.getBoundingClientRect();
-
-  setEffect({
-    id: Date.now(),
-    x: rect.left + rect.width / 2,
-    y: rect.top + rect.height / 2,
-  });
-
-  setTimeout(() => setEffect(null), 700);
-};
   return (
     
 <div

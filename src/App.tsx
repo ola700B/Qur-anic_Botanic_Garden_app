@@ -56,7 +56,7 @@ const [lang, setLang] = useState<"ar" | "en">("en");
       element={<Home lang={lang} setLang={setLang} />}
     />
     <Route path="/plants" element={<Plants lang={lang} />} />
-    <Route path="/memory_game" element={<Memory_game lang={lang} />} />
+    <Route path="/memory_game" element={<Memory_game />} />
   </Routes>
 </BrowserRouter>
   );
