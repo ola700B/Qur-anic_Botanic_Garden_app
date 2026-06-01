@@ -1,20 +1,36 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Eye } from "lucide-react";
 
 export default function Home({
-  lang,
+   lang,
   setLang,
 }: {
   lang: "en" | "ar";
   setLang: (lang: "en" | "ar") => void;
 }) {
   const isAr = lang === "ar";
-const [theme, ] = useState<string | null>(
+  const [theme, ] = useState<string | null>(
   localStorage.getItem("theme")
 ); 
-  const navigate = useNavigate();
-const [effect, ] = useState<{
-  id: number;
+const handleLangClick = (
+  lang: "ar" | "en",
+  e: React.MouseEvent<HTMLButtonElement>
+) => {
+  setLang(lang);
+
+  const rect = e.currentTarget.getBoundingClientRect();
+
+  setEffect({
+    x: rect.left + rect.width / 2,
+    y: rect.top + rect.height / 2,
+  });
+
+  setTimeout(() => setEffect(null), 700);
+};
+const navigate = useNavigate();
+const [effect, setEffect] = useState<{
+  
   x: number;
   y: number;
 } | null>(null);
@@ -24,10 +40,10 @@ const [effect, ] = useState<{
 <div
   className={`min-h-screen transition-all duration-500 ${
     theme === "dark"
-      ? "bg-gray-900 text-white"
+      ? "bg-gray-900 text-black"
       : theme === "light"
       ? "bg-gray-100 text-black"
-      : "bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800"
+      : "bg-green-700"
   }`}
 >
   <div className="
@@ -42,57 +58,83 @@ animate-pulse
 
       {/* 🌿 Navbar */}
       <nav className="flex items-center justify-between px-6 py-4">
-        <button className="cursor-pointer"
-  onClick={() => {
-    localStorage.removeItem("theme");
-    window.location.reload();
-  }}
->
-  Change Theme
-</button>
+{/* Logo */}
       </nav>
-
       {/* Hero */}
-      <div className="flex flex-col items-center justify-center text-center mt-24 px-4">
- <h2 className="text-4xl font-bold text-green-800 mb-4">
+      
+      <div className="flex flex-col items-center justify-center text-center mt-16 px-4">
+ <h2 className="text-3xl font-bold text-green-950 mb-4">
           {isAr
             ? " حديقة القرآن النباتية "
             : " حديقة القرآن النباتية "}
         </h2>
-        <h2 className="text-4xl font-bold text-green-800 mb-4">
+        <h2 className="text-3xl font-bold text-green-950 mb-2">
           {isAr
             ? " Qur'anic Botanic Garden "
             : " Qur'anic Botanic Garden "}
         </h2>
+<h2 className="text-lg font- text-green-950 mb-2">
+          {isAr
+            ? " عضو في مؤسسة قطر "
+            : " عضو في مؤسسة قطر  "}
+        </h2>
+        <h2 className="text-lg font-bold text-green-950 mb-2">
+          {isAr
+            ? " Memeber of Qatar Foundation "
+            : " Memeber of Qatar Foundation "}
+        </h2>
+     <div className="flex flex-col items-center gap-2 mt-4">
 
-     <div className="flex flex-col items-center gap-4 mt-8">
 
-
-  <div className="grid grid-col-1 gap-4">
+  <div className="grid grid-col-1 gap-2">
 
     <button
- onClick={() => {
-    setLang("ar");
-    navigate("/plants");
-  }}
+ onClick={(e) => {
+  handleLangClick("ar", e); // الحلقة والنجوم
 
-      className={`w-36 py-2 cursor-pointer bg-white border-2 rounded-lg shadow-md
-      hover:scale-105 transition-all duration-300
-      ${lang === "ar" ? "border-green-600 text-green-600" : "border-gray-300"}`}
+  setTimeout(() => {
+    navigate("/plants");
+  }, 600);
+}}
+ className="
+        h-20
+        w-44
+        text-white
+        bg-black/60
+        backdrop-blur-sm
+        rounded-lg
+        text-3xl
+        font-bold
+        hover:scale-105
+        transition
+        cursor-pointer
+      "
+     
     >
       العربية
     </button>
 
     <button
-         onClick={() => {
-    setLang("en");
-    navigate("/plants");
-  }}
+        onClick={(e) => {
+  handleLangClick("ar", e); // الحلقة والنجوم
 
-      className={`w-36 py-2 cursor-pointer bg-white border-2 rounded-lg shadow-md
-      hover:scale-105 transition-all duration-300
-      ${lang === "en" ? "border-green-600 text-green-600" : "border-gray-300"}`}
-    >
+  setTimeout(() => {
+    navigate("/plants");
+  }, 600);
+}}
+ className="
+        h-20
+        w-44
+        text-white
+        bg-black/60
+        backdrop-blur-sm
+        rounded-lg
+        text-3xl
+        font-bold
+        hover:scale-105
+        transition
+        cursor-pointer
+      ">
       ENGLISH
     </button>
 
@@ -117,7 +159,36 @@ animate-pulse
     <span className="absolute top-4 left-6 text-green-400 animate-float2">✨</span>
     <span className="absolute -left-6 text-yellow-300 animate-float3">⭐</span>
   </div>
-)}
+)}<button
+  onClick={() => {
+    localStorage.removeItem("theme");
+    window.location.reload();
+  }}
+  className="
+    fixed
+    bottom-4
+    left-1/2
+    -translate-x-1/2
+    flex
+    items-center
+    gap-3
+    px-6
+    py-3
+    bg-green-900
+    text-white
+    rounded-full
+    shadow-lg
+    hover:scale-105
+    transition-all
+    duration-300
+    cursor-pointer
+    z-50
+  ">
+  <Eye size={24} />
+  <span className="font-semibold">
+    Change Theme
+  </span>
+</button>
     </div>
     
   );

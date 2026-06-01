@@ -151,7 +151,7 @@ export default function MemoryGame() {
         ? "bg-gray-900 text-white"
         : theme === "light"
         ? "bg-gray-100 text-black"
-        : "bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800"
+        : "bg-green-700 text-gray-800"
     }`}
   >
       

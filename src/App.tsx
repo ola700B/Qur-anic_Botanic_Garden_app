@@ -16,7 +16,7 @@ const [lang, setLang] = useState<"ar" | "en">("en");
 
   if (!theme) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4  bg-linear-to-br from-cyan-100 via-blue-400 to-green-500 text-gray-800">
+      <div className="min-h-screen flex flex-col items-center justify-center gap-4  bg-green-800 text-gray-800">
         <h1 className="text-3xl font-bold mb-5">
           Choose Theme
         </h1>

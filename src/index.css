@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "@fontsource/tajawal/400.css";
+@import "@fontsource/tajawal/700.css";
+body {
+    font-family: "Tajawal", "Source Sans 3", sans-serif;
+}
+
 .perspective {
     perspective: 1000px;
 }

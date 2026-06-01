@@ -57,7 +57,7 @@ function Plants({ lang }: { lang: "ar" | "en" }) {
       ? "bg-gray-900 text-white"
       : theme === "light"
       ? "bg-gray-100 text-black"
-      : "bg-linear-to-br from-cyan-100 via-green-400 to-green-500 text-gray-800"
+      : "bg-green-800"
   }`}
 >
       <div
@@ -99,7 +99,10 @@ animate-pulse
         ))}
       </div>
       <Link to={"/memory_game"}>
-  <button className="mt-8 mb-5 block mx-auto px-6 py-3 bg-green-600 text-white rounded-xl">
+  <button className="mt-4 mb-8 hover:scale-105
+    transition-all
+    duration-300
+    cursor-pointer h-14 w-32 block mx-auto px-6 py-3 bg-green-600 text-white text-lg rounded-xl">
     {lang === "ar" ? "ابدأ اللعب" : "Play Game"}
   </button>
 </Link>
@@ -254,7 +257,7 @@ animate-pulse
     </div>
   </div>
 )}
-<div className="fixed  bottom-0 left-0 w-full bg-black/50 h-14 backdrop-blur-md  flex justify-around items-center py-3 text-white z-50">
+<div className="fixed  bottom-0 left-0 w-full bg-black/50 h-10 backdrop-blur-md  flex justify-between items-center py-3 text-white z-50">
   
   {/* BACK */}
   <button
@@ -263,7 +266,7 @@ animate-pulse
   >
     <ArrowLeft size={22} />
    <span className="text-xs">
-  {lang === "ar" ? "رجوع" : "Back"}
+  {lang === "ar" ? "" : ""}
 </span>
   </button>
 
@@ -274,7 +277,7 @@ animate-pulse
   >
     <Home size={22} />
     <span className="text-xs">
-  {lang === "ar" ? "الرئيسية" : "Home"}
+  {lang === "ar" ? "" : ""}
 </span>
   </button>
 
