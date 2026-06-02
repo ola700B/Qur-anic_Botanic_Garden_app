@@ -32,7 +32,6 @@ export default function MemoryGame() {
   const [bestScore, setBestScore] = useState<number | null>(null);
   const [winSoundPlayed, setWinSoundPlayed] = useState(false);
   const [previewMode, setPreviewMode] = useState(true);
-  const theme = localStorage.getItem("theme");
 
   useEffect(() => {
     setCards(createDeck());
@@ -147,14 +146,7 @@ export default function MemoryGame() {
 
   return (
      <div
-    className={`min-h-screen transition-all duration-500 flex flex-col items-center justify-center p-4 ${
-      theme === "dark"
-        ? "bg-gray-900 text-white"
-        : theme === "light"
-        ? "bg-gray-100 text-black"
-        : "bg-green-700 text-gray-800"
-    }`}
-  >
+    className="min-h-screen transition-all duration-500 flex flex-col items-center justify-center p-4">
       
       {/* STATS */}
         <div className="w-full max-w-6xl flex flex-wrap justify-center gap-4 mb-8">
@@ -172,7 +164,7 @@ export default function MemoryGame() {
       </div>
 
       {/* GAME */}
-        <div className="w-full max-w-6xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 place-items-center">
+        <div className="w-full max-w-4xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 place-items-center">
         {cards.map((card, index) => {
           // ⭐ FIX: previewMode يفتح كل الكروت أول 3 ثواني
           const isFlipped =
