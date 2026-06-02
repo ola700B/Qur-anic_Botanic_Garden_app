@@ -28,7 +28,7 @@ const [effect, setEffect] = useState<{
       <div className="absolute  w-full rounded-full blur-3xl bg-white " />
       
       <div className="flex flex-col items-center justify-center text-center  px-4">
-        <img className="w-60 sm:w-60 md:w-72 lg:w-80 mb-10 z-10 mt-10" src={logo} alt="logo" ></img>
+        <img className="w-60 sm:w-60 md:w-72 lg:w-80 mb-4 z-10 mt-14 " src={logo} alt="logo" ></img>
      <div className="flex flex-col items-center gap-2 mt-20">
 
 

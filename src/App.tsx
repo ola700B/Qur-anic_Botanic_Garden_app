@@ -8,11 +8,12 @@ import Description from "./pages/description";
 import Habitat from "./pages/habitat";
 import Uses from "./pages/uses";
 import Quran from "./pages/quran";
-
+import FlowerEffect from "./components/flowerEffect";
 function App() {
  
   return (
-    <BrowserRouter>
+    <FlowerEffect>
+           <BrowserRouter>
   <Routes>
     <Route
       path="/"
@@ -29,6 +30,8 @@ function App() {
 </Route>
   </Routes>
 </BrowserRouter>
+    </FlowerEffect>
+  
   );
 }
 

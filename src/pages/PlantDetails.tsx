@@ -36,7 +36,7 @@ function PlantDetails() {
 
   return (
     <div className="min-h-screen bg-emerald-500 flex justify-center p-4">
-      <div className="w-[90%] sm:w-[80%] md:w-[65%] lg:w-112.5 flex flex-col">
+      <div className="w-[90%] sm:w-[80%] md:w-[65%] lg:w-112.5 flex flex-col mt-10">
 
         {/* Plant Card */}
         <div className="bg-white rounded-xl overflow-hidden shadow-xl">

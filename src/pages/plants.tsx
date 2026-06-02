@@ -54,7 +54,10 @@ function Plants() {
   max-w-6xl
   mx-auto
   px-4
-  pt-10">
+  pt-10
+  mt-10
+  pb-10
+  ">
 
         {plants.map((plant) => (
           <div
@@ -96,7 +99,7 @@ function Plants() {
         ))}
 
       </div>
-<div className="w-full flex justify-center mt-6 mb-4 px-4">
+<div className="w-full flex justify-center mt-10 mb-4 px-4">
 
   <div
     onClick={() => setIsSearchOpen(true)}
