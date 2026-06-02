@@ -1,24 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye } from "lucide-react";
-
-export default function Home({
-   lang,
-  setLang,
-}: {
-  lang: "en" | "ar";
-  setLang: (lang: "en" | "ar") => void;
-}) {
-  const isAr = lang === "ar";
-  const [theme, ] = useState<string | null>(
-  localStorage.getItem("theme")
-); 
-const handleLangClick = (
-  lang: "ar" | "en",
-  e: React.MouseEvent<HTMLButtonElement>
-) => {
-  setLang(lang);
-
+import logo from "../assets/img/logo2.png";
+export default function Home() {
+ 
+const handleLangClick = (e: React.MouseEvent<HTMLButtonElement>) => {
   const rect = e.currentTarget.getBoundingClientRect();
 
   setEffect({
@@ -26,11 +11,11 @@ const handleLangClick = (
     y: rect.top + rect.height / 2,
   });
 
-  setTimeout(() => setEffect(null), 700);
+  setTimeout(() => setEffect(null), 900);
 };
+
 const navigate = useNavigate();
 const [effect, setEffect] = useState<{
-  
   x: number;
   y: number;
 } | null>(null);
@@ -38,59 +23,20 @@ const [effect, setEffect] = useState<{
   return (
     
 <div
-  className={`min-h-screen transition-all duration-500 ${
-    theme === "dark"
-      ? "bg-gray-900 text-black"
-      : theme === "light"
-      ? "bg-gray-100 text-black"
-      : "bg-green-700"
-  }`}
->
-  <div className="
-    absolute
-    -top-40
-    -left-40
-    rounded-full
-    blur-3xl
-    bg-white
-animate-pulse
-  " />
-
-      {/* 🌿 Navbar */}
-      <nav className="flex items-center justify-between px-6 py-4">
-{/* Logo */}
-      </nav>
-      {/* Hero */}
+  className="min-h-screen flex flex-col items-center">
+  {/* GLOW EFFECT */}
+      <div className="absolute  w-full rounded-full blur-3xl bg-white " />
       
-      <div className="flex flex-col items-center justify-center text-center mt-16 px-4">
- <h2 className="text-3xl font-bold text-green-950 mb-4">
-          {isAr
-            ? " حديقة القرآن النباتية "
-            : " حديقة القرآن النباتية "}
-        </h2>
-        <h2 className="text-3xl font-bold text-green-950 mb-2">
-          {isAr
-            ? " Qur'anic Botanic Garden "
-            : " Qur'anic Botanic Garden "}
-        </h2>
-<h2 className="text-lg font- text-green-950 mb-2">
-          {isAr
-            ? " عضو في مؤسسة قطر "
-            : " عضو في مؤسسة قطر  "}
-        </h2>
-        <h2 className="text-lg font-bold text-green-950 mb-2">
-          {isAr
-            ? " Memeber of Qatar Foundation "
-            : " Memeber of Qatar Foundation "}
-        </h2>
-     <div className="flex flex-col items-center gap-2 mt-4">
+      <div className="flex flex-col items-center justify-center text-center  px-4">
+        <img className="w-60 sm:w-60 md:w-72 lg:w-80 mb-10 z-10 mt-10" src={logo} alt="logo" ></img>
+     <div className="flex flex-col items-center gap-2 mt-20">
 
 
-  <div className="grid grid-col-1 gap-2">
+  <div className="flex flex-col gap-4 z-10 w-full max-w-xs sm:max-w-sm mb-6">
 
     <button
  onClick={(e) => {
-  handleLangClick("ar", e); // الحلقة والنجوم
+  handleLangClick(e); // الحلقة والنجوم
 
   setTimeout(() => {
     navigate("/plants");
@@ -103,7 +49,7 @@ animate-pulse
         bg-black/60
         backdrop-blur-sm
         rounded-lg
-        text-3xl
+        text-xl
         font-bold
         hover:scale-105
         transition
@@ -116,11 +62,11 @@ animate-pulse
 
     <button
         onClick={(e) => {
-  handleLangClick("ar", e); // الحلقة والنجوم
+  handleLangClick(e);
 
   setTimeout(() => {
     navigate("/plants");
-  }, 600);
+  }, 1000);
 }}
  className="
         h-20
@@ -129,11 +75,12 @@ animate-pulse
         bg-black/60
         backdrop-blur-sm
         rounded-lg
-        text-3xl
+        
         font-bold
         hover:scale-105
         transition
         cursor-pointer
+         text-xl sm:text-2xl md:text-3xl
       ">
       ENGLISH
     </button>
@@ -144,7 +91,7 @@ animate-pulse
       </div>
      {effect && (
   <div
-    className="pointer-events-none fixed"
+    className="pointer-events-none absolute"
     style={{
       left: effect.x,
       top: effect.y,
@@ -152,43 +99,14 @@ animate-pulse
     }}
   >
     {/* الحلقة */}
-    <span className="absolute w-10 h-10 border-2 border-green-400 rounded-full animate-ping" />
+    <span className="absolute w-20 h-20 border-2 border-green-400 rounded-full animate-ping" />
 
     {/* نجوم */}
     <span className="absolute -top-6 text-yellow-400 animate-float1">⭐</span>
     <span className="absolute top-4 left-6 text-green-400 animate-float2">✨</span>
     <span className="absolute -left-6 text-yellow-300 animate-float3">⭐</span>
   </div>
-)}<button
-  onClick={() => {
-    localStorage.removeItem("theme");
-    window.location.reload();
-  }}
-  className="
-    fixed
-    bottom-4
-    left-1/2
-    -translate-x-1/2
-    flex
-    items-center
-    gap-3
-    px-6
-    py-3
-    bg-green-900
-    text-white
-    rounded-full
-    shadow-lg
-    hover:scale-105
-    transition-all
-    duration-300
-    cursor-pointer
-    z-50
-  ">
-  <Eye size={24} />
-  <span className="font-semibold">
-    Change Theme
-  </span>
-</button>
+)}
     </div>
     
   );

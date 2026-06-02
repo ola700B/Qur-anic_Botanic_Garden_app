@@ -1,287 +1,221 @@
 import sidr from "../assets/img/sidr.jpg";
-import apple from "../assets/img/applePopup.jpg";
+import silq from "../assets/img/plant2.png";
 import olive from "../assets/img/6.jpg";
 import wheat from "../assets/img/wheatPopup.jpg";
-import sidrPopup from "../assets/img/sidrPopup.jpg"
-import applePopup from "../assets/img/applePopup.jpg"
-import olivePopup from "../assets/img/olivePopup.jpg"
-import wheatPopup from "../assets/img/wheat.jpg"
+import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Home } from "lucide-react";
 
 type Plant = {
   id: number;
+  code: string;
   name: string;
   image: string;
-  popupImage: string;
 };
 
-function Plants({ lang }: { lang: "ar" | "en" }) {
-   const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
+function Plants() {
+  const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
   const [selectedSection, setSelectedSection] = useState("");
+  const [searchNumber, setSearchNumber] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
-  const theme = localStorage.getItem("theme");
+ const handleSearch = () => {
+  const found = plants.find((p) => p.id === Number(searchNumber));
+
+  if (found) {
+    navigate(`/plant/${found.id}`);
+    setIsSearchOpen(false);
+    setSearchNumber("");
+  }
+};
+  
   const plants: Plant[] = [
-  {
-    id: 1,
-    name: lang === "ar" ? "السدر" : "Sidr",
-    image: sidr,
-    popupImage: sidrPopup,
-  },
-  {
-    id: 2,
-    name: lang === "ar" ? "التفاح" : "Apple",
-    image: apple,
-    popupImage: applePopup,
-  },
-  {
-    id: 3,
-    name: lang === "ar" ? "الزيتون" : "Olive",
-    image: olive,
-    popupImage: olivePopup,
-  },
-  {
-    id: 4,
-    name: lang === "ar" ? "القمح" : "Wheat",
-    image: wheat,
-    popupImage: wheatPopup,
-  },
-];
+    { id: 1, code: "01", name: "Sidr", image: sidr },
+    { id: 2, code: "02", name: "Silq", image: silq },
+    { id: 3, code: "03", name: "Olive", image: olive },
+    { id: 4, code: "04", name: "Wheat", image: wheat },
+  ];
+
   return (
-    
-    <div
-  className={`min-h-screen transition-all duration-500 ${
-    theme === "dark"
-      ? "bg-gray-900 text-white"
-      : theme === "light"
-      ? "bg-gray-100 text-black"
-      : "bg-green-800"
-  }`}
->
-      <div
-        className="
-    absolute
-    -top-40
-    -left-40
-    rounded-full
-    blur-3xl
-    bg-white
-animate-pulse
-  "
-      />
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5 w-full max-w-5xl mx-auto">
+    <div className="min-h-screen pb-20 sm:pb-24 md:pb-28 relative">
+      
+      {/* GLOW EFFECT */}
+      <div className="absolute  w-full rounded-full blur-3xl bg-white " />
+
+      {/* GRID */}
+      <div className=" grid
+  grid-cols-2
+  sm:grid-cols-2
+  md:grid-cols-3
+  lg:grid-cols-4
+  gap-4
+  sm:gap-6
+  w-full
+  max-w-6xl
+  mx-auto
+  px-4
+  pt-10">
+
         {plants.map((plant) => (
           <div
             key={plant.id}
-           onClick={() => {
-      if (plant.id === 1) {
-        setSelectedPlant(plant);
-      }
-    }}
-            className="bg-green-700 m-4 mt-5 rounded-xl p-3 shadow-lg hover:scale-105 transition duration-300 cursor-pointer"
-          >
-            {/* IMAGE BOX */}
-            <div className="relative rounded-xl p-2 h-32 flex items-center justify-center">
+           onClick={() => plant.id === 2 && navigate(`/plant/${plant.id}`)}
+           className="
+  group
+  rounded-xl
+  overflow-hidden
+  shadow-md
+  hover:shadow-xl
+  hover:-translate-y-1
+  transition-all
+  duration-300
+  cursor-pointer
+  bg-green-900/20
+  backdrop-blur-sm
+  max-h-65
+">
+            {/* IMAGE */}
+            <div className="relative h-36 sm:h-40 overflow-hidden">
               <img
                 src={plant.image}
                 alt={plant.name}
-                className="absolute h-full w-full rounded-lg object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
+
+              {/* NUMBER */}
+              <div className="absolute top-3 right-3 w-10 h-10 rounded-xl bg-green-950/90 text-white font-bold flex items-center justify-center shadow-lg">
+                {String(plant.id).padStart(2, "0")}
+              </div>
             </div>
 
-            {/* NAME */}
-            <p className="text-white text-left mt-2 font-semibold ">
-              {plant.name}
-            </p>
+            {/* INFO */}
+            <div className="bg-linear-to-r from-green-950 via-green-900 to-green-950 p-4">
+              <h3 className="text-white text-base sm:text-lg font-bold">{plant.name}</h3>
+            </div>
           </div>
         ))}
+
       </div>
-      <Link to={"/memory_game"}>
-  <button className="mt-4 mb-8 hover:scale-105
-    transition-all
-    duration-300
-    cursor-pointer h-14 w-32 block mx-auto px-6 py-3 bg-green-600 text-white text-lg rounded-xl">
-    {lang === "ar" ? "ابدأ اللعب" : "Play Game"}
-  </button>
-</Link>
-      {selectedPlant && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 animate-fadeIn">
-          <div className=" bg-black/30 backdrop-blur-sm  w-[90%] max-w-3xl rounded-3xl p-6 relative animate-modal">
-            <button
-              onClick={() => setSelectedPlant(null)}
-              className="absolute top-1 right-4 text-lg cursor-pointer"
-            >
-              ✕
-            </button>
+<div className="w-full flex justify-center mt-6 mb-4 px-4">
 
-            <img
-              src={selectedPlant.popupImage}
-              alt={selectedPlant.name}
-              className="w-full h-72 rounded-2xl"
-              style={{ imageRendering: "auto" }}
+  <div
+    onClick={() => setIsSearchOpen(true)}
+    className="
+      w-full
+      max-w-md
+      h-12
+      flex
+      items-center
+      gap-2
+      px-4
+      rounded-xl
+      bg-white
+      border
+      border-green-800
+      shadow-md
+      cursor-pointer
+      hover:shadow-lg
+      transition
+    "
+  >
+    {/* ICON */}
+    <Search size={18} className="text-green-700" />
 
-            />
+    {/* TEXT */}
+    <span className="text-green-900/60  text-sm">
+      Search by plant number...
+    </span>
 
-            <h2 className="text-3xl font-bold text-center mt-4">
-              {selectedPlant.name}
-            </h2>
+  </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <button
-                onClick={() => setSelectedSection("Habitat & Distribution")}
-                className="bg-linear-to-r
-    from-green-700
-    via-green-800
-    to-green-950
-    text-white
-    p-4
-    rounded-lg
-    font-semibold
-    shadow-lg
-    hover:-translate-y-1
-    hover:shadow-2xl
-    transition-all
-    duration-300 cursor-pointer"
-              >
-                Habitat & Distribution
-              </button>
+</div>
+      {/* BUTTON */}
+      <Link to="/memory_game">
+        <button className="
+        h-16
+        w-36
+        block 
+        mx-auto
+        mt-10
+        text-white
+        bg-black/60
+        backdrop-blur-sm
+        rounded-lg
+        text-2xl
+        font-bold
+        hover:scale-105
+        transition
+        cursor-pointer
+      ">
+          Play Games
+        </button>
+      </Link>
+      {isSearchOpen && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
 
-              <button
-                onClick={() => setSelectedSection("Description")}
-                className="bg-linear-to-r
-    from-green-700
-    via-green-800
-    to-green-950
-    text-white
-    p-4
-    rounded-lg
-    font-semibold
-    shadow-lg
-    hover:-translate-y-1
-    hover:shadow-2xl
-    transition-all
-    duration-300 cursor-pointer"
-              >
-                Description
-              </button>
+    <div className="bg-black/40 backdrop-blur-md p-6 rounded-2xl w-72 text-white relative">
 
-              <button
-                onClick={() => setSelectedSection("Uses")}
-                className="bg-linear-to-r
-    from-green-700
-    via-green-800
-    to-green-950
-    text-white
-    p-4
-    rounded-lg
-    font-semibold
-    shadow-lg
-    hover:-translate-y-1
-    hover:shadow-2xl
-    transition-all
-    duration-300 cursor-pointer"
-              >
-                Uses
-              </button>
-
-              <button
-                onClick={() => setSelectedSection("Qur'an & Hadith")}
-                className="bg-linear-to-r
-    from-green-700
-    via-green-800
-    to-green-950
-    text-white
-    p-4
-    rounded-lg
-    font-semibold
-    shadow-lg
-    hover:-translate-y-1
-    hover:shadow-2xl
-    transition-all
-    duration-300 cursor-pointer"
-              >
-                Qur'an & Hadith
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-      {selectedSection && (
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-60">
-    <div className="bg-black/30 backdrop-blur-sm text-white p-8 rounded-3xl max-w-xl h-auto w-[90%]">
-
+      {/* CLOSE */}
       <button
-        onClick={() => setSelectedSection("")}
-        className="float-right text-2xl cursor-pointer"
+        onClick={() => setIsSearchOpen(false)}
+        className="absolute top-2 cursor-pointer  right-3 text-lg"
       >
         ✕
       </button>
 
-      {/* TITLE + DIVIDER */}
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold capitalize">
-          {selectedSection}
-        </h2>
+      <h2 className="text-center text-lg mb-4 font-bold">
+        Enter Plant Number
+      </h2>
 
-        <div className="w-full h-0.5 bg-white/70 mx-auto mt-2 rounded-full"></div>
+      {/* INPUT */}
+      <input
+        value={searchNumber}
+        readOnly
+        placeholder="00"
+        className="w-full text-center text-2xl h-12 rounded-lg bg-white/10 mb-4 outline-none"
+      />
+
+      {/* KEYPAD */}
+      <div className="grid grid-cols-3 gap-2">
+        {[1,2,3,4,5,6,7,8,9,0].map((num) => (
+          <button
+            key={num}
+            onClick={() =>
+              setSearchNumber((prev) =>
+                (prev + num).slice(0, 2)
+              )
+            }
+            className="bg-white/10 rounded-lg p-3 hover:bg-white/20"
+          >
+            {num}
+          </button>
+        ))}
       </div>
 
-      {selectedSection === "Habitat & Distribution" && (
-        <p>
-          The Sidr tree grows mainly in hot, dry regions and is highly drought-resistant. It is commonly found in deserts, dry valleys, and rocky areas with poor soil.
+      {/* ACTIONS */}
+      <div className="flex justify-between mt-4">
+        <button
+          onClick={() => setSearchNumber("")}
+          className="text-red-400  hover:bg-white/20 rounded-lg p-3 cursor-pointer hover:scale-105
+        transition"
+        >
+          Clear
+        </button>
 
-          It is widely distributed across the Middle East, North and East Africa, and parts of South Asia, where the climate is warm and rainfall is low.
-        </p>
-      )}
-
-      {selectedSection === "Description" && (
-        <p>
-          Sidr tree is a sturdy and deep-rooted tree which has withstood the devastating floods of Eram at Ma’arib Yemen with two other trees: the Tamarisk and the Mustard Tree. The Sidr tree belongs to the “Ziziphus” family of plants. The average tree size is normally between 7-8 meters high. Its branches are soft and gray-yellowish. The flowers of the plant are yellow as well as the round Sidr fruits which turn reddish when ripe.
-        </p>
-      )}
-
-      {selectedSection === "Uses" && (
-        <p>
-          Sidr is used in traditional medicine, especially for treating skin problems and supporting digestion. Its leaves are also used for cleansing hair and body, while its flowers are important for producing high-quality honey.
-        </p>
-      )}
-
-      {selectedSection === "Qur'an & Hadith" && (
-        <p>
-          The Sidr tree is mentioned in multiple places in the Quran, carrying both earthly and heavenly meanings: The Tree of Paradise: Allah describes the beauty of Paradise using thornless Sidr trees: "Among lote-trees with no thorns" (Surah Al-Waqi'ah 56:28). Sidrat al-Muntaha: The Sidr tree marks the ultimate boundary in the heavens, which the Prophet ﷺ passed during the Night Journey (Isra wal-Mi'raj): "Near the Lote Tree of the farthest limit" (Surah An-Najm 53:14). The Prophet Muhammad ﷺ emphasized the use of Sidr leaves in practical, everyday Islamic life: Purification and Ritual Washing: The Prophet ﷺ instructed that the deceased be washed with water and Sidr. He also directed new converts to Islam to bathe themselves with water and Sidr.
-        </p>
-      )}
+        <button
+          onClick={handleSearch}
+          className="text-green-400 font-bold  hover:bg-white/20 rounded-lg p-3 cursor-pointer hover:scale-105
+        transition "
+        >
+          Search
+        </button>
+      </div>
 
     </div>
+
   </div>
-)}
-<div className="fixed  bottom-0 left-0 w-full bg-black/50 h-10 backdrop-blur-md  flex justify-between items-center py-3 text-white z-50">
-  
-  {/* BACK */}
-  <button
-    onClick={() => navigate(-1)}
-    className="flex flex-col items-center ml-4 cursor-pointer gap-1 hover:text-green-300 transition"
-  >
-    <ArrowLeft size={22} />
-   <span className="text-xs">
-  {lang === "ar" ? "" : ""}
-</span>
-  </button>
-
-  {/* HOME */}
-  <button
-    onClick={() => navigate("/")}
-    className="flex flex-col items-center mr-4 cursor-pointer gap-1 hover:text-green-300 transition"
-  >
-    <Home size={22} />
-    <span className="text-xs">
-  {lang === "ar" ? "" : ""}
-</span>
-  </button>
-
-</div>
+)}    
     </div>
   );
 }

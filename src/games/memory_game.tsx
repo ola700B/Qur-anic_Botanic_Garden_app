@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import plant1 from "../assets/img/1.png";
 import plant2 from "../assets/img/2.png";
 import plant3 from "../assets/img/3.png";
@@ -234,7 +235,7 @@ export default function MemoryGame() {
 
             <button
               onClick={restart}
-              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg"
+              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg cursor-pointer"
             >
               Play Again
             </button>
