@@ -15,8 +15,7 @@ type Plant = {
 };
 
 function Plants() {
-  const [selectedPlant, setSelectedPlant] = useState<Plant | null>(null);
-  const [selectedSection, setSelectedSection] = useState("");
+ 
   const [searchNumber, setSearchNumber] = useState("");
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
