@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import memoryImg from "../assets/img/memory.png";
+import sortingImg from "../assets/img/sorting.jpg";
+import quizImg from "../assets/img/quiz.png";
 function GameList() {
   const { t } = useTranslation();
 
@@ -9,19 +11,19 @@ function GameList() {
       id: 1,
       nameKey: "games.memory",
       path: "/memory_game",
-      image: "src/assets/img/memory.png",
+      image: memoryImg,
     },
     {
       id: 2,
       nameKey: "games.sorting",
       path: "/sorting_game",
-      image: "src/assets/img/sorting.jpg",
+      image: sortingImg,
     },
     {
       id: 3,
       nameKey: "games.quiz",
       path: "/quiz_game",
-      image: "src/assets/img/quiz.png",
+      image: quizImg,
     },
   ];
 

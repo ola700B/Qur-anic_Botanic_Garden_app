@@ -204,11 +204,11 @@ export default function MemoryGame() {
                 onClick={() => handleFlip(index)}
                 className="
                 w-full
-                max-w-[100px]
-                sm:max-w-[120px]
-                md:max-w-[140px]
-                lg:max-w-[160px]
-                aspect-[3/4]
+                max-w-25
+                sm:max-w-30
+                md:max-w-35
+                lg:max-w-40
+                aspect-3/4
                 cursor-pointer
               "
                 style={{ perspective: "1000px" }}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/img/logo3.png";
+import logo from "../assets/img/logo2.png";
 import { useTranslation } from "react-i18next";
 import "../i18n.tsx";
 export default function Home() {
@@ -26,12 +26,12 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center">
       <div className="flex flex-col items-center justify-center text-center py-20 px-4 ">
         <img
-          className="sm:w-2xl md:w-5xl lg:w-6xl z-10 mb-10"
+          className="sm:w-lg md:w-xl lg:w-2xl z-10 mb-5 mt-5"
           src={logo}
           alt="logo"
         ></img>
         <div className="flex flex-col items-center gap-2 ">
-          <div className="flex flex-col items-center gap-4 z-10 mt-96">
+          <div className="flex flex-col items-center gap-4 z-10 mt-30">
             <button
               onClick={(e) => {
                 handleLangClick(e);
@@ -43,9 +43,9 @@ export default function Home() {
                 }, 600);
               }}
               className="
-    w-80
-    h-32
-    text-4xl
+    w-40 sm:w-60 md:w-72 lg:w-80
+    h-16 sm:h-20 md:h-24 lg:h-32
+    text-xl sm:text-2xl md:text-3xl lg:text-4xl
     font-bold
     rounded-xl
     text-white
@@ -69,9 +69,9 @@ export default function Home() {
                 }, 600);
               }}
               className="
-    w-80
-    h-32
-    text-4xl
+    w-40 sm:w-60 md:w-72 lg:w-80
+    h-16 sm:h-20 md:h-24 lg:h-32
+    text-xl sm:text-2xl md:text-3xl lg:text-4xl
     font-bold
     rounded-xl
     text-white
