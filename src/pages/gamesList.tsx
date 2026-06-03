@@ -3,35 +3,21 @@ import { useTranslation } from "react-i18next";
 import memoryImg from "../assets/img/memory.png";
 import sortingImg from "../assets/img/sorting.jpg";
 import quizImg from "../assets/img/quiz.png";
+
 function GameList() {
   const { t } = useTranslation();
 
   const games = [
-    {
-      id: 1,
-      nameKey: "games.memory",
-      path: "/memory_game",
-      image: memoryImg,
-    },
-    {
-      id: 2,
-      nameKey: "games.sorting",
-      path: "/sorting_game",
-      image: sortingImg,
-    },
-    {
-      id: 3,
-      nameKey: "games.quiz",
-      path: "/quiz_game",
-      image: quizImg,
-    },
+    { id: 1, nameKey: "games.memory", path: "/memory_game", image: memoryImg },
+    { id: 2, nameKey: "games.sorting", path: "/sorting_game", image: sortingImg },
+    { id: 3, nameKey: "games.quiz", path: "/quiz_game", image: quizImg },
   ];
 
   return (
     <div className="min-h-screen bg-emerald-500 p-4 md:p-8 pb-28 flex flex-col items-center">
 
       {/* TITLE */}
-      <h1 className="mt-14 mb-10 text-4xl font-bold text-center text-green-950">
+      <h1 className="mt-10 mb-8 text-3xl md:text-5xl font-bold text-center text-green-950">
         {t("games.title")}
       </h1>
 
@@ -39,11 +25,10 @@ function GameList() {
       <div
         className="
           grid grid-cols-1
-          gap-6
-          justify-items-center
-          w-fit
-          max-w-6xl
-          mx-auto
+          sm:grid-cols-2
+          lg:grid-cols-3
+          gap-5 md:gap-6
+          w-full max-w-6xl
         "
       >
         {games.map((game) => (
@@ -52,17 +37,13 @@ function GameList() {
             <div
               className="
                 w-full
-                h-96
-                sm:h-90
-                lg:h-150
-                lg:w-4xl
+                aspect-4/3
                 overflow-hidden
                 rounded-xl
                 bg-green-900/20
-                shadow-md
+                shadow-sm
                 backdrop-blur-sm
                 transition-all duration-300
-                group
                 hover:shadow-xl hover:-translate-y-1
                 cursor-pointer
                 flex flex-col
@@ -76,16 +57,16 @@ function GameList() {
                   alt={t(game.nameKey)}
                   className="
                     w-full h-full
-                    object-fill
+                    object-cover
                     transition-transform duration-500
-                    group-hover:scale-110
+                    hover:scale-105
                   "
                 />
               </div>
 
               {/* TITLE */}
-              <div className="h-[25%] flex items-center justify-center bg-green-950">
-                <h2 className="text-white text-lg sm:text-xl font-bold text-center">
+              <div className="h-[25%] flex items-center justify-center bg-green-950 px-2">
+                <h2 className="text-white text-sm sm:text-lg md:text-xl font-bold text-center">
                   {t(game.nameKey)}
                 </h2>
               </div>

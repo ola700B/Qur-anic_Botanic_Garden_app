@@ -73,88 +73,65 @@ function Plants() {
       />
 
       {/* GRID */}
+    <div
+  className="
+    grid grid-cols-4
+    md:grid-cols-4
+    gap-4 md:gap-5
+    w-full
+    px-4 pt-6
+  "
+>
+  {plants.map((plant) => (
+    <div
+      key={plant.id}
+      onClick={() => plant.id === 2 && navigate(`/plant/${plant.id}`)}
+      className="
+        overflow-hidden
+        rounded-xl
+        bg-green-900/20
+        shadow-sm
+        backdrop-blur-sm
+        transition-all duration-300
+        hover:shadow-lg hover:-translate-y-1
+        cursor-pointer
+        h-[150px] md:h-[170px]
+      "
+    >
+      {/* IMAGE */}
+      <div className="h-[70%] w-full overflow-hidden">
+        <img
+          src={plant.image}
+          alt={plant.name}
+          className="
+            w-full h-full
+            object-cover
+            transition-transform duration-500
+            group-hover:scale-105
+          "
+        />
+      </div>
+
+      {/* INFO */}
       <div
         className="
-          grid grid-cols-1
-          w-full
-          gap-6
-          px-4 pt-10
-          sm:grid-cols-2 sm:px-6
-          md:grid-cols-4
-          lg:grid-cols-4 lg:px-10
-          xl:px-16
-          2xl:px-24
-"
+          h-[30%]
+          flex items-center justify-between
+          px-3
+          bg-green-950
+        "
       >
-        {plants.map((plant) => (
-          <div
-            key={plant.id}
-            onClick={() => plant.id === 2 && navigate(`/plant/${plant.id}`)}
-            className="
-              overflow-hidden
-              max-h-65
-              rounded-xl
-              bg-green-900/20
-              shadow-md
-              backdrop-blur-sm
-              transition-all duration-300
-              group
-              hover:shadow-xl hover:-translate-y-1
-              cursor-pointer
-"
-          >
-            {/* IMAGE */}
-            <div
-              className="
-                relative
-                overflow-hidden
-                h-32
-                sm:h-44
-                md:h-46
-                lg:h-48
-"
-            >
-              <img
-                src={plant.image}
-                alt={plant.name}
-                className="
-                  object-fill
-                  w-full h-full
-                  transition-transform duration-500
-                  group-hover:scale-110
-"
-              />
-            </div>
+        <h3 className="text-white text-sm md:text-base font-semibold">
+          {plant.name}
+        </h3>
 
-            {/* INFO */}
-            <div
-              className="
-                flex
-                items-center justify-between
-                p-4
-                bg-linear-to-r
-                from-green-950 via-green-900 to-green-950
-"
-            >
-              <h3
-                className="
-                  text-white text-base font-bold
-                  sm:text-lg
-"
-              >
-                {plant.name}
-              </h3>
-              <span
-                className="
-                  text-green-200 text-sm font-semibold tracking-widest
-"
-              >
-                {String(plant.id).padStart(2, "0")}
-              </span>
-            </div>
-          </div>
-        ))}
+        <span className="text-green-200 text-xs md:text-sm font-semibold">
+          {String(plant.id).padStart(2, "0")}
+        </span>
       </div>
+    </div>
+  ))}
+</div>
       <div
         className="
           flex
