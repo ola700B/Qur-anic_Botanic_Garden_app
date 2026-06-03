@@ -1,8 +1,26 @@
 @import "tailwindcss";
 @import "@fontsource/tajawal/400.css";
 @import "@fontsource/tajawal/700.css";
+@font-face {
+    font-family: "Greta";
+    src: url("./assets/fonts/Greta-BF64fae530446b2.otf") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Grata Arabic";
+    src: url("./assets/fonts/Greta\ Arabic\ Regular.ttf") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
-    font-family: "Tajawal", "Source Sans 3", sans-serif;
+    font-family: "Greta", "Grata Arabic", sans-serif;
+}
+
+body {
+    font-family: "Grata Arabic", sans-serif;
 }
 
 body {

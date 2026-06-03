@@ -4,6 +4,9 @@ import plant1 from "../assets/img/1.png";
 import plant2 from "../assets/img/2.png";
 import plant3 from "../assets/img/3.png";
 import plant4 from "../assets/img/4.png";
+import plant5 from "../assets/img/leaf3.png";
+import plant6 from "../assets/img/leaf5.png";
+import { useTranslation } from "react-i18next";
 
 type CardType = {
   id: number;
@@ -11,7 +14,7 @@ type CardType = {
   matched: boolean;
 };
 
-const plantImages = [plant1, plant2, plant3, plant4];
+const plantImages = [plant1, plant2, plant3, plant4, plant5, plant6];
 
 const createDeck = (): CardType[] =>
   [...plantImages, ...plantImages]
@@ -23,6 +26,8 @@ const createDeck = (): CardType[] =>
     .sort(() => Math.random() - 0.5);
 
 export default function MemoryGame() {
+    const { t, i18n } = useTranslation();
+
   const [cards, setCards] = useState<CardType[]>([]);
   const [flipped, setFlipped] = useState<number[]>([]);
   const [disabled, setDisabled] = useState(false);
@@ -99,7 +104,7 @@ export default function MemoryGame() {
 
   const playWrongSound = () => {
     const audio = new Audio(
-      "https://cdn.pixabay.com/download/audio/2022/03/24/audio_2b3f3a7f9d.mp3"
+      "https://cdn.pixabay.com/download/audio/2022/03/24/audio_2b3f3a7f9d.mp3",
     );
     audio.volume = 0.2;
     audio.play().catch(() => {});
@@ -124,8 +129,8 @@ export default function MemoryGame() {
       if (cards[a].image === cards[b].image) {
         setCards((prev) =>
           prev.map((c, i) =>
-            i === a || i === b ? { ...c, matched: true } : c
-          )
+            i === a || i === b ? { ...c, matched: true } : c,
+          ),
         );
 
         setTimeout(() => {
@@ -145,91 +150,136 @@ export default function MemoryGame() {
   };
 
   return (
-     <div
-    className="min-h-screen transition-all duration-500 flex flex-col items-center justify-center p-4">
-      
-      {/* STATS */}
-        <div className="w-full max-w-6xl flex flex-wrap justify-center gap-4 mb-8">
-        <div className="bg-white/80 px-4 py-2 rounded-xl font-semibold">
-          🎯 Moves: {moves}
+    <div
+      className="
+      flex flex-col
+      items-center
+      w-full
+      min-h-screen
+      gap-3
+      px-3 py-4
+      sm:px-6
+      md:px-8
+    "
+    >
+      {/* WRAPPER CENTER */}
+      <div className="w-full max-w-3xl flex flex-col items-center">
+        {/* STATS */}
+        <div className={`
+          sticky top-0 z-20 flex flex-wrap justify-center w-full gap-2 sm:gap-3 md:gap-4 py-2 mt-10
+          ${i18n.language === "ar" ? "flex-row-reverse" : ""}
+        `}>
+          <div className="px-3 py-2 rounded-xl bg-white/80 font-semibold text-sm sm:text-base md:text-lg lg:text-2xl">
+            🎯  {t("memory.moves")}: {moves}
+          </div>
+
+          <div className="px-3 py-2 rounded-xl bg-white/80 font-semibold text-sm sm:text-base md:text-lg lg:text-2xl">
+            ⏱️  {t("memory.time")}: {time}s
+          </div>
+
+          <div className="px-3 py-2 rounded-xl bg-white/80 font-semibold text-sm sm:text-base md:text-lg lg:text-2xl">
+            🏆  {t("memory.best")}: {bestScore !== null ? `${bestScore}s` : "—"}
+          </div>
         </div>
+        <div className="h-6 sm:h-8 md:h-16 lg:h-24" />
+        {/* GAME GRID */}
+        <div
+          className="
+          grid
+          grid-cols-4
+          lg:gap-x-4
+          gap-1 sm:gap-2 md:gap-3
+          w-full
+          justify-items-center
+          mt-8 sm:mt-10 md:mt-16 lg:mt-24
+        "
+        >
+          {cards.map((card, index) => {
+            const isFlipped =
+              previewMode || flipped.includes(index) || card.matched;
 
-        <div className="bg-white/80 px-4 py-2 rounded-xl font-semibold">
-          ⏱️ Time: {time}s
-        </div>
-
-        <div className="bg-white/80 px-4 py-2 rounded-xl font-semibold">
-          🏆 Best: {bestScore !== null ? `${bestScore}s` : "—"}
-        </div>
-      </div>
-
-      {/* GAME */}
-        <div className="w-full max-w-4xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 place-items-center">
-        {cards.map((card, index) => {
-          // ⭐ FIX: previewMode يفتح كل الكروت أول 3 ثواني
-          const isFlipped =
-            previewMode || flipped.includes(index) || card.matched;
-
-          return (
-            <div
-              key={card.id}
-              onClick={() => handleFlip(index)}
-              className="w-full aspect-3/4 max-w-35 max-w-35sm:max-w-40 md:max-w-45 cursor-pointer"
-              style={{ perspective: "1000px" }}
-            >
+            return (
               <div
-                className="relative w-full h-full transition-transform duration-500"
-                style={{
-                  transformStyle: "preserve-3d",
-                  transform: isFlipped
-                    ? "rotateY(180deg)"
-                    : "rotateY(0deg)",
-                }}
+                key={card.id}
+                onClick={() => handleFlip(index)}
+                className="
+                w-full
+                max-w-[100px]
+                sm:max-w-[120px]
+                md:max-w-[140px]
+                lg:max-w-[160px]
+                aspect-[3/4]
+                cursor-pointer
+              "
+                style={{ perspective: "1000px" }}
               >
-                {/* BACK */}
                 <div
-                  className="absolute w-full h-full bg-green-600 rounded-xl flex items-center justify-center text-white text-3xl"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  🌿
-                </div>
-
-                {/* FRONT */}
-                <div
-                  className="absolute w-full h-full bg-white rounded-xl flex items-center justify-center"
+                  className="
+                  relative w-full h-full
+                  transition-transform duration-500
+                "
                   style={{
-                    transform: "rotateY(180deg)",
-                    backfaceVisibility: "hidden",
+                    transformStyle: "preserve-3d",
+                    transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
                   }}
                 >
-                  <img
-                    src={card.image}
-                    alt=""
-                    className="w-20 h-28 object-contain"
-                  />
+                  {/* BACK */}
+                  <div
+                    className="
+                    absolute w-full h-full
+                    rounded-xl
+                    flex items-center justify-center
+                    text-white text-3xl
+                    bg-green-900/70
+                    backdrop-blur-sm
+                  "
+                    style={{ backfaceVisibility: "hidden" }}
+                  >
+                    🌿
+                  </div>
+
+                  {/* FRONT */}
+                  <div
+                    className="
+                    absolute w-full h-full
+                    rounded-xl
+                    flex items-center justify-center
+                    bg-white
+                  "
+                    style={{
+                      transform: "rotateY(180deg)",
+                      backfaceVisibility: "hidden",
+                    }}
+                  >
+                    <img
+                      src={card.image}
+                      alt=""
+                      className="w-20 h-28 object-contain"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
 
       {/* WIN */}
       {win && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-2xl text-center">
-            <h1 className="text-2xl font-bold text-green-700 mb-2">
-              🎉 You Win!
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="p-6 rounded-2xl text-center bg-white">
+            <h1 className="mb-2 text-2xl text-green-700 font-bold">
+              {t("memory.win")}
             </h1>
 
-            <p>Time: {time}s</p>
-            <p>Moves: {moves}</p>
+            <p>{t("memory.time")}: {time}s</p>
+            <p>{t("memory.moves")}: {moves}</p>
 
             <button
               onClick={restart}
-              className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg cursor-pointer"
+              className="px-4 py-2 mt-4 rounded-lg text-white bg-green-600 cursor-pointer"
             >
-              Play Again
+               {t("memory.playAgain")}
             </button>
           </div>
         </div>
