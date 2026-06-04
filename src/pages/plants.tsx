@@ -1,7 +1,7 @@
-import sidr from "../assets/img/6.jpg";
+import sidr from "../assets/img/6.png";
 import silq from "../assets/img/plant2.png";
-import olive from "../assets/img/olivePopup.jpg";
-import wheat from "../assets/img/wheatPopup.jpg";
+import olive from "../assets/img/18.png";
+import wheat from "../assets/img/42.png";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
