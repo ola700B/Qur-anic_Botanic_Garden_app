@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { plants } from "./plantsData";
 import { useTranslation } from "react-i18next";
-
+/*dfsdfds*/
 function Uses() {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
