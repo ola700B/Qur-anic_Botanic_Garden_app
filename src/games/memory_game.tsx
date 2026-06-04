@@ -7,6 +7,7 @@ import plant4 from "../assets/img/4.png";
 import plant5 from "../assets/img/leaf3.png";
 import plant6 from "../assets/img/leaf5.png";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 type CardType = {
   id: number;
@@ -148,6 +149,7 @@ export default function MemoryGame() {
       }
     }
   };
+  const navigate = useNavigate();
 
   return (
     <div
@@ -166,7 +168,7 @@ export default function MemoryGame() {
       <div className="w-full max-w-3xl flex flex-col items-center">
         {/* STATS */}
         <div className={`
-          sticky top-0 z-20 flex flex-wrap justify-center w-full gap-2 sm:gap-3 md:gap-4 py-2 mt-10
+          sticky top-0 z-20 flex flex-wrap justify-center w-full gap-2 sm:gap-3 md:gap-4 py-2 mt-14
           ${i18n.language === "ar" ? "flex-row-reverse" : ""}
         `}>
           <div className="px-3 py-2 rounded-xl bg-white/80 font-semibold text-sm sm:text-base md:text-lg lg:text-2xl">
@@ -185,13 +187,15 @@ export default function MemoryGame() {
         {/* GAME GRID */}
         <div
           className="
+          
+          lg:gap-y-20
           grid
           grid-cols-4
           lg:gap-x-4
           gap-1 sm:gap-2 md:gap-3
           w-full
           justify-items-center
-          mt-8 sm:mt-10 md:mt-16 lg:mt-24
+           sm:mt-10 md:mt-16 lg:mt-36
         "
         >
           {cards.map((card, index) => {
@@ -281,6 +285,12 @@ export default function MemoryGame() {
             >
                {t("memory.playAgain")}
             </button>
+             <button
+                onClick={() => navigate("/gamesList")}
+                className="px-2 mr-3 cursor-pointer  py-2 mt-3 rounded-lg text-white bg-gray-600 hover:bg-gray-700 transition"
+              >
+                Back to Games
+              </button>
           </div>
         </div>
       )}

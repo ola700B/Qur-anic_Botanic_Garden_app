@@ -14,6 +14,7 @@ import Quran from "./pages/quran";
 import FlowerEffect from "./components/flowerEffect";
 import GameList from "./pages/gamesList";
 import MemoryLevel from "./pages/memoryLevel";
+import Plant_sort from "./games/plant_sort";
 
 function DirectionProvider() {
   const { i18n } = useTranslation();
@@ -48,6 +49,8 @@ function App() {
               <Route path="/quran/:id" element={<Quran />} />
               <Route path="/gamesList" element={<GameList />} />
               <Route path="/memoryLevel" element={<MemoryLevel />} />
+              <Route path="/plant_sort" element={<Plant_sort/>} />
+
             </Route>
           </Routes>
         </BrowserRouter>

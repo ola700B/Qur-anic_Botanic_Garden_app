@@ -11,43 +11,52 @@ function Layout() {
   return (
     <div className="min-h-screen flex flex-col">
 
-      <div className="flex-1">
+      {/* CONTENT */}
+      <div className="flex-1 ">
         <Outlet />
       </div>
 
-      <div
+      {/* BACK BUTTON (LEFT) */}
+      <button
+        onClick={() => navigate(-1)}
         className="
-          sticky bottom-0
-          w-full h-16
-          bg-black/60 backdrop-blur-sm
-          flex items-center justify-between
-          px-6
-          text-white z-30
+          fixed bottom-5 left-5
+          w-16 h-16
+         bg-black/60 backdrop-blur-xl
+          shadow-lg
+          rounded-full
+          flex items-center justify-center
+          text-white font-bold
+          hover:scale-110 transition
+          cursor-pointer
         "
+        aria-label="Go back"
       >
+        <ArrowLeft
+          size={24}
+          className={isArabic ? "rotate-180" : ""}
+        />
+      </button>
 
-        {/* BACK */}
-        <button
-          aria-label="Go back"
-          onClick={() => navigate(-1)}
-          className="cursor-pointer flex items-center gap-2"
-        >
-          <ArrowLeft
-            size={30}
-            className={isArabic ? "rotate-180" : ""}
-          />
-        </button>
+      {/* HOME BUTTON (RIGHT) */}
+      <button
+        onClick={() => navigate("/")}
+        className="
+          fixed bottom-5 right-5
+          w-16 h-16
+          text-white font-bold
+      bg-black/60 backdrop-blur-xl
+          shadow-lg
+          rounded-full
+          flex items-center justify-center
+          cursor-pointer
+          hover:scale-110 transition
+        "
+        aria-label="Home"
+      >
+        <Home size={24} />
+      </button>
 
-        {/* HOME */}
-        <button
-          aria-label="Home"
-          onClick={() => navigate("/")}
-          className="cursor-pointer flex items-center gap-2"
-        >
-          <Home size={30} />
-        </button>
-
-      </div>
     </div>
   );
 }

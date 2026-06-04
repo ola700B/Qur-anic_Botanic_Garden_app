@@ -49,6 +49,10 @@ function Plants() {
   { id: 14, code: "14", name: t("mint"), image: olive },
   { id: 15, code: "15", name: t("basil"), image: wheat },
   { id: 16, code: "16", name: t("ginger"), image: silq },
+  { id: 13, code: "17", name: t("banana"), image: sidr },
+  { id: 14, code: "18", name: t("mint"), image: olive },
+  { id: 15, code: "19", name: t("basil"), image: wheat },
+  { id: 16, code: "20", name: t("ginger"), image: silq },
 ];
 
   return (
@@ -75,11 +79,12 @@ function Plants() {
       {/* GRID */}
     <div
   className="
-    grid grid-cols-4
+    grid grid-cols-2
     md:grid-cols-4
-    gap-4 md:gap-5
+    lg:gap-y-8
+    gap-6 md:gap-5
     w-full
-    px-4 pt-6
+    px-4 pt-10 md:pt-15 
   "
 >
   {plants.map((plant) => (
@@ -95,17 +100,18 @@ function Plants() {
         transition-all duration-300
         hover:shadow-lg hover:-translate-y-1
         cursor-pointer
-        h-[150px] md:h-[170px]
+        h-60 md:h-70
       "
     >
       {/* IMAGE */}
-      <div className="h-[70%] w-full overflow-hidden">
+      <div className="h-[85%] w-full overflow-hidden">
         <img
           src={plant.image}
           alt={plant.name}
           className="
             w-full h-full
             object-cover
+            object-center
             transition-transform duration-500
             group-hover:scale-105
           "
@@ -115,8 +121,7 @@ function Plants() {
       {/* INFO */}
       <div
         className="
-          h-[30%]
-          flex items-center justify-between
+         h-[15%] flex items-center justify-between
           px-3
           bg-green-950
         "
@@ -138,7 +143,7 @@ function Plants() {
           justify-center
           w-full
           px-4
-          mt-20
+          mt-10
 "
       >
         <div
@@ -195,12 +200,13 @@ function Plants() {
       text-xl text-white font-bold
       bg-black/60
       sm:w-64 sm:h-20 sm:text-2xl 
+      lg:text-3xl
       cursor-pointer
       hover:scale-105
       transition
     "
   >
-    <Gamepad2 size={24} />
+    <Gamepad2 size={25} />
     {t("playGames")}
   </button>
 </Link>

@@ -116,3 +116,18 @@ body {
 .animate-float3 {
     animation: float3 0.8s ease-out forwards;
 }
+
+@keyframes fall {
+    from {
+        transform: translateY(-150px);
+        opacity: 0.2;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.animate-fall {
+    animation: fall 1.2s ease-in-out;
+}
