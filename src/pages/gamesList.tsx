@@ -38,7 +38,7 @@ function GameList() {
               className="
                 lg:w-160
                 w-full
-                h-70 sm:h-60 md:h-75 lg:h-110
+                h-70 sm:h-60 md:h-90 lg:h-120
                 overflow-hidden
                 rounded-xl
                 bg-green-900/20

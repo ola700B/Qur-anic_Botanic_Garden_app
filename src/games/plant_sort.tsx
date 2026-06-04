@@ -4,8 +4,14 @@ import {
   useDraggable,
   useDroppable,
   type DragEndEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
+
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 /* ================= AUDIO ================= */
 const successAudio = new Audio("/sounds/match.mp3");
 const wrongAudio = new Audio("/sounds/wrong.mp3");
@@ -17,21 +23,24 @@ type Category = "seed" | "flower" | "fruit";
 
 interface PlantCard {
   id: number;
-  name: string;
+  nameKey: string;
   emoji: string;
   category: Category;
 }
 
+/* ================= CARDS ================= */
 const gameCards: PlantCard[] = [
-  { id: 1, name: "Rose", emoji: "🌹", category: "flower" },
-  { id: 2, name: "Apple", emoji: "🍎", category: "fruit" },
-  { id: 3, name: "Seed", emoji: "🌱", category: "seed" },
+  { id: 1, nameKey: "plantCards.rose", emoji: "🌹", category: "flower" },
+  { id: 2, nameKey: "plantCards.apple", emoji: "🍎", category: "fruit" },
+  { id: 3, nameKey: "plantCards.seed", emoji: "🌱", category: "seed" },
 ];
+
 /* ================= DRAG CARD ================= */
 function DraggableCard({ card, y }: { card: PlantCard; y: number }) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: card.id,
-  });
+  const { t } = useTranslation();
+
+  const { attributes, listeners, setNodeRef, transform } =
+    useDraggable({ id: card.id });
 
   return (
     <div
@@ -61,7 +70,10 @@ function DraggableCard({ card, y }: { card: PlantCard; y: number }) {
       }}
     >
       <div className="text-6xl text-center">{card.emoji}</div>
-      <h2 className="mt-3 text-center text-xl font-bold">{card.name}</h2>
+
+      <h2 className="mt-3 text-center text-xl font-bold">
+        {t(card.nameKey)}
+      </h2>
     </div>
   );
 }
@@ -103,36 +115,43 @@ function DropBox({
   );
 }
 
-/* ================= MAIN GAME ================= */
+/* ================= GAME ================= */
 export default function Plant_sort() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5, // مهم للموبايل
+      },
+    })
+  );
 
   const [cards, setCards] = useState(gameCards);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
 
-  const [, setIsDragging] = useState(false);
   const [paused, setPaused] = useState(false);
-
   const [shake, setShake] = useState(false);
   const [successBox, setSuccessBox] = useState<Category | null>(null);
+
   const [showWin, setShowWin] = useState(false);
-  const [losePlayed, setLosePlayed] = useState(false); // 👈 مهم للصوت
+  const [losePlayed, setLosePlayed] = useState(false);
 
   const currentCard = cards[0];
 
   const yRef = useRef(-200);
   const frameRef = useRef<number | null>(null);
-
   const [, forceRender] = useState(0);
 
-  /* ================= RESET ================= */
+  /* ================= RESET CARD ================= */
   const resetCard = () => {
     yRef.current = -200;
     setSuccessBox(null);
   };
 
-  /* ================= FALL LOOP ================= */
+  /* ================= FALL ANIMATION ================= */
   useEffect(() => {
     if (!currentCard) return;
 
@@ -171,7 +190,7 @@ export default function Plant_sort() {
     };
   }, [currentCard, paused]);
 
-  /* ================= GAME OVER SOUND ================= */
+  /* ================= LOSE SOUND ================= */
   useEffect(() => {
     if (lives <= 0 && !losePlayed) {
       loseAudio.play();
@@ -179,14 +198,10 @@ export default function Plant_sort() {
     }
   }, [lives, losePlayed]);
 
-  /* ================= DRAG ================= */
-  const handleDragStart = () => {
-    setIsDragging(true);
-    setPaused(true);
-  };
+  /* ================= DRAG EVENTS ================= */
+  const handleDragStart = () => setPaused(true);
 
   const handleDragEnd = (event: DragEndEvent) => {
-    setIsDragging(false);
     setPaused(false);
 
     const box = event.over?.id;
@@ -204,7 +219,6 @@ export default function Plant_sort() {
           winAudio.play();
           setShowWin(true);
         }
-
         setCards((c) => c.slice(1));
       }, 250);
     } else {
@@ -218,11 +232,15 @@ export default function Plant_sort() {
     }
   };
 
+  /* ================= UI ================= */
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div
-        className={`min-h-screen relative overflow-hidden ${shake ? "animate-pulse" : ""}`}
-      >
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
+      <div className={`min-h-screen relative overflow-hidden ${shake ? "animate-pulse" : ""}`}>
+
         {/* HEADER */}
         <div className="flex justify-between px-6 py-4 text-white text-xl font-bold">
           <div>❤️ {lives}</div>
@@ -230,37 +248,26 @@ export default function Plant_sort() {
         </div>
 
         {/* CARD */}
-        {currentCard && <DraggableCard card={currentCard} y={yRef.current} />}
+        {currentCard && (
+          <DraggableCard card={currentCard} y={yRef.current} />
+        )}
 
         {/* BOXES */}
         <div className="absolute bottom-6 w-full flex justify-around">
-          <DropBox
-            id="seed"
-            emoji="🌱"
-            label="Seed"
-            active={successBox === "seed"}
-          />
-          <DropBox
-            id="flower"
-            emoji="🌸"
-            label="Flower"
-            active={successBox === "flower"}
-          />
-          <DropBox
-            id="fruit"
-            emoji="🍎"
-            label="Fruit"
-            active={successBox === "fruit"}
-          />
+          <DropBox id="seed" emoji="🌱" label={t("sorting.seed")} active={successBox === "seed"} />
+          <DropBox id="flower" emoji="🌸" label={t("sorting.flower")} active={successBox === "flower"} />
+          <DropBox id="fruit" emoji="🍎" label={t("sorting.fruit")} active={successBox === "fruit"} />
         </div>
 
         {/* WIN */}
         {showWin && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="p-6 rounded-2xl text-center bg-white shadow-2xl">
-              <h1 className="text-2xl text-green-700 font-bold">🎉 You Win!</h1>
+              <h1 className="text-2xl text-green-700 font-bold">
+                {t("sorting.winTitle")}
+              </h1>
 
-              <p>Score: {score}</p>
+              <p>{t("sorting.score")}: {score}</p>
 
               <button
                 onClick={() => {
@@ -270,15 +277,16 @@ export default function Plant_sort() {
                   setShowWin(false);
                   setLosePlayed(false);
                 }}
-                className="px-4 py-2 cursor-pointer mt-4 rounded-lg text-white bg-green-600 hover:bg-gray-700 transition"
+                className="px-4 py-2 mt-4 rounded-lg text-white bg-green-600"
               >
-                Play Again
+                {t("sorting.playAgain")}
               </button>
+
               <button
                 onClick={() => navigate("/gamesList")}
-                className="px-2 mr-3 cursor-pointer  py-2 mt-3 rounded-lg text-white bg-gray-600 hover:bg-gray-700 transition"
+                className="px-3 py-2 mt-3 ml-2 rounded-lg text-white bg-gray-600"
               >
-                Back to Games
+                {t("sorting.back")}
               </button>
             </div>
           </div>
@@ -288,9 +296,11 @@ export default function Plant_sort() {
         {lives <= 0 && (
           <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
             <div className="p-6 rounded-2xl text-center bg-white shadow-2xl">
-              <h1 className="text-2xl text-red-600 font-bold">💔 Game Over</h1>
+              <h1 className="text-2xl text-red-600 font-bold">
+                {t("sorting.loseTitle")}
+              </h1>
 
-              <p>Final Score: {score}</p>
+              <p>{t("sorting.finalScore")}: {score}</p>
 
               <button
                 onClick={() => {
@@ -302,13 +312,14 @@ export default function Plant_sort() {
                 }}
                 className="px-4 py-2 mt-4 rounded-lg text-white bg-red-600"
               >
-                Try Again
+                {t("sorting.tryAgain")}
               </button>
+
               <button
                 onClick={() => navigate("/gamesList")}
-                className="px-2 mr-3 cursor-pointer  py-2 mt-3 rounded-lg text-white bg-gray-600 hover:bg-gray-700 transition"
+                className="px-3 py-2 mt-3 ml-2 rounded-lg text-white bg-gray-600"
               >
-                Back to Games
+                {t("sorting.back")}
               </button>
             </div>
           </div>

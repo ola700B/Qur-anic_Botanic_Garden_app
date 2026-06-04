@@ -64,65 +64,94 @@ i18n
             win: "🎉 You Win!",
             playAgain: "Play Again",
           },
+          sorting: {
+            seed: "Seed",
+            flower: "Flower",
+            fruit: "Fruit",
+
+            winTitle: "🎉 You Win!",
+            loseTitle: "💔 Game Over",
+
+            score: "Score",
+            finalScore: "Final Score",
+
+            playAgain: "Play Again",
+            tryAgain: "Try Again",
+            back: "Back to Games",
+          },
         },
-      
       },
 
       ar: {
-  translation: {
-    sidr: "السدر",
-    silq: "السلق",
-    olive: "الزيتون",
-    wheat: "القمح",
-    datePalm: "النخيل",
-    fig: "التين",
-    pomegranate: "الرمان",
-    grape: "العنب",
-    banana: "الموز",
-    mint: "النعناع",
-    basil: "الريحان",
-    ginger: "الزنجبيل",
-    playGames: "العب",
-    searchPlant: "ابحث برقم النبات...",
-    enterPlantNumber: "أدخل رقم النبات",
-    clear: "مسح",
-    search: "بحث",
-    plantNotFound: "النبتة غير موجودة",
-    habitat: "الموطن والتوزيع",
-    description: "الوصف",
-    uses: "الاستخدامات",
-    quran: "القرآن والحديث",
+        translation: {
+          sidr: "السدر",
+          silq: "السلق",
+          olive: "الزيتون",
+          wheat: "القمح",
+          datePalm: "النخيل",
+          fig: "التين",
+          pomegranate: "الرمان",
+          grape: "العنب",
+          banana: "الموز",
+          mint: "النعناع",
+          basil: "الريحان",
+          ginger: "الزنجبيل",
+          playGames: "العب",
+          searchPlant: "ابحث برقم النبات...",
+          enterPlantNumber: "أدخل رقم النبات",
+          clear: "مسح",
+          search: "بحث",
+          plantNotFound: "النبتة غير موجودة",
+          habitat: "الموطن والتوزيع",
+          description: "الوصف",
+          uses: "الاستخدامات",
+          quran: "القرآن والحديث",
 
-    plant_sidr: "السدر",
-    plant_silq: "السلق",
-    plant_olive: "الزيتون",
-    plant_wheat: "القمح",
+          plant_sidr: "السدر",
+          plant_silq: "السلق",
+          plant_olive: "الزيتون",
+          plant_wheat: "القمح",
 
-    plant_silq_habitat: "موطنها الأصلي ...",
+          plant_silq_habitat: "موطنها الأصلي ...",
 
-    plant_silq_description: "عشبة حولية ...",
+          plant_silq_description: "عشبة حولية ...",
 
-    plant_silq_uses: "الطهي",
+          plant_silq_uses: "الطهي",
 
-    plant_silq_quran: "..." ,
+          plant_silq_quran: "...",
 
-    games: {
-      title: "الألعاب",
-      memory: "لعبة الذاكرة",
-      sorting: "لعبة الترتيب",
-      quiz: "لعبة الأسئلة",
-      play: "العب",
-    },
+          games: {
+            title: "الألعاب",
+            memory: "لعبة الذاكرة",
+            sorting: "لعبة الترتيب",
+            quiz: "لعبة الأسئلة",
+            play: "العب",
+          },
 
-    memory: {
-      moves: "الحركات",
-      time: "الوقت",
-      best: "أفضل نتيجة",
-      win: "🎉 فزت!",
-      playAgain: "العب مرة أخرى",
-    }
-  }
-}
+          memory: {
+            moves: "الحركات",
+            time: "الوقت",
+            best: "أفضل نتيجة",
+            win: "🎉 فزت!",
+            playAgain: "العب مرة أخرى",
+          },
+          sorting: {
+            seed: "بذرة",
+            flower: "زهرة",
+            fruit: "فاكهة",
+
+            winTitle: "🎉 لقد فزت!",
+            loseTitle: "💔 انتهت اللعبة",
+
+            score: "النتيجة",
+            finalScore: "النتيجة النهائية",
+
+            playAgain: "إعادة اللعب",
+            tryAgain: "إعادة المحاولة",
+            back: "الرجوع للألعاب",
+          },
+        },
+      },
     },
 
     interpolation: {
