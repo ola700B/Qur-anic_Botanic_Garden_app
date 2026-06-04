@@ -79,6 +79,11 @@ i18n
             tryAgain: "Try Again",
             back: "Back to Games",
           },
+          plantCards: {
+            rose: "Rose",
+            apple: "Apple",
+            seed: "Seed",
+          },
         },
       },
 
@@ -149,6 +154,11 @@ i18n
             playAgain: "إعادة اللعب",
             tryAgain: "إعادة المحاولة",
             back: "الرجوع للألعاب",
+          },
+          plantCards: {
+            rose: "وردة",
+            apple: "تفاحة",
+            seed: "بذرة",
           },
         },
       },

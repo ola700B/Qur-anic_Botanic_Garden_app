@@ -4,6 +4,8 @@ import {
   useDraggable,
   useDroppable,
   type DragEndEvent,
+ TouchSensor,
+  MouseSensor,
   PointerSensor,
   useSensor,
   useSensors,
@@ -48,6 +50,7 @@ function DraggableCard({ card, y }: { card: PlantCard; y: number }) {
       {...listeners}
       {...attributes}
       className="
+      touch-none 
         w-52
         rounded-[28px]
         bg-white
@@ -120,13 +123,7 @@ export default function Plant_sort() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 5, // مهم للموبايل
-      },
-    })
-  );
+ 
 
   const [cards, setCards] = useState(gameCards);
   const [score, setScore] = useState(0);
@@ -231,14 +228,27 @@ export default function Plant_sort() {
       setCards((c) => c.slice(1));
     }
   };
-
+const sensors = useSensors(
+  useSensor(MouseSensor),
+  useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 120, // مهم للموبايل
+      tolerance: 5,
+    },
+  }),
+  useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 5,
+    },
+  })
+);
   /* ================= UI ================= */
   return (
-    <DndContext
-      sensors={sensors}
-      onDragStart={handleDragStart}
-      onDragEnd={handleDragEnd}
-    >
+   <DndContext
+  sensors={sensors}
+  onDragStart={handleDragStart}
+  onDragEnd={handleDragEnd}
+>
       <div className={`min-h-screen relative overflow-hidden ${shake ? "animate-pulse" : ""}`}>
 
         {/* HEADER */}
@@ -253,7 +263,7 @@ export default function Plant_sort() {
         )}
 
         {/* BOXES */}
-        <div className="absolute bottom-6 w-full flex justify-around">
+        <div className="absolute bottom-25 w-full px-3 flex gap-2 sm:gap-6 justify-between sm:justify-around">
           <DropBox id="seed" emoji="🌱" label={t("sorting.seed")} active={successBox === "seed"} />
           <DropBox id="flower" emoji="🌸" label={t("sorting.flower")} active={successBox === "flower"} />
           <DropBox id="fruit" emoji="🍎" label={t("sorting.fruit")} active={successBox === "fruit"} />
@@ -284,7 +294,7 @@ export default function Plant_sort() {
 
               <button
                 onClick={() => navigate("/gamesList")}
-                className="px-3 py-2 mt-3 ml-2 rounded-lg text-white bg-gray-600"
+                className="px-3 py-2 mt-3 mr-3 rounded-lg text-white bg-gray-600"
               >
                 {t("sorting.back")}
               </button>
