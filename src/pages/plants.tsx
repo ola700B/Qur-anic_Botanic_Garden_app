@@ -1,7 +1,7 @@
 import sidr from "../assets/img/6.png";
 import silq from "../assets/img/plant2.png";
-import olive from "../assets/img/18.png";
-import wheat from "../assets/img/35.png";
+import olive from "../assets/img/35.png";
+import wheat from "../assets/img/42.png";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -46,10 +46,10 @@ function Plants() {
   { id: 14, code: "14", name: t("mint"), image: olive },
   { id: 15, code: "15", name: t("basil"), image: wheat },
   { id: 16, code: "16", name: t("ginger"), image: silq },
-  { id: 13, code: "17", name: t("banana"), image: sidr },
-  { id: 14, code: "18", name: t("mint"), image: olive },
-  { id: 15, code: "19", name: t("basil"), image: wheat },
-  { id: 16, code: "20", name: t("ginger"), image: silq },
+  { id: 17, code: "17", name: t("banana"), image: sidr },
+  { id: 18, code: "18", name: t("mint"), image: olive },
+  { id: 19, code: "19", name: t("basil"), image: wheat },
+  { id: 20, code: "20", name: t("ginger"), image: silq },
 ];
 
   return (
