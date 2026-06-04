@@ -1,29 +1,17 @@
 import { useParams } from "react-router-dom";
+import { plants } from "./plantsData";
 
-import sidr from "../assets/img/sidr.jpg";
-import silq from "../assets/img/plant2.png";
-import olive from "../assets/img/6.jpg";
-import wheat from "../assets/img/wheatPopup.jpg";
+
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-type Plant = {
-  id: number;
-  code: string;
-  nameKey: string;
-  image: string;
-};
+
 
 function PlantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const plants: Plant[] = [
-  { id: 1, code: "01", nameKey: "plant_sidr", image: sidr },
-  { id: 2, code: "02", nameKey: "plant_silq", image: silq },
-  { id: 3, code: "03", nameKey: "plant_olive", image: olive },
-  { id: 4, code: "04", nameKey: "plant_wheat", image: wheat },
-];
+  
 
   const plant = plants.find((p) => p.id === Number(id));
 
@@ -103,6 +91,10 @@ function PlantDetails() {
             >
                {t(plant.nameKey)}
             </h1>
+             <p className="mt-2 text-base md:text-lg lg:text-xl text-center">
+  <i>{plant.scientificName.italic}</i>{" "}
+  {plant.scientificName.author}
+</p>
           </div>
         </div>
 

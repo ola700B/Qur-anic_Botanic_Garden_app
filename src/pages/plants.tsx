@@ -1,7 +1,7 @@
-import sidr from "../assets/img/sidr.jpg";
+import sidr from "../assets/img/6.png";
 import silq from "../assets/img/plant2.png";
-import olive from "../assets/img/6.jpg";
-import wheat from "../assets/img/wheatPopup.jpg";
+import olive from "../assets/img/18.png";
+import wheat from "../assets/img/35.png";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -22,15 +22,12 @@ function Plants() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const navigate = useNavigate();
   const handleSearch = () => {
-    const found = plants.find((p) => p.id === Number(searchNumber));
-
-    if (found) {
-      navigate(`/plant/${found.id}`);
-      setIsSearchOpen(false);
-      setSearchNumber("");
-    }
-  };
-
+  if (Number(searchNumber) === 2) {
+    navigate("/plant/2");
+    setIsSearchOpen(false);
+    setSearchNumber("");
+  } 
+};
  const plants: Plant[] = [
   { id: 1, code: "01", name: t("sidr"), image: sidr },
   { id: 2, code: "02", name: t("silq"), image: silq },

@@ -46,10 +46,10 @@ function Habitat() {
             src={plant.image}
             alt={t(plant.nameKey)}
             className="
-            w-28 h-28
+            
             sm:w-36 sm:h-36
-            md:w-44 md:h-44
-            lg:w-52 lg:h-52
+            md:w-72 md:h-72
+            lg:w-80 lg:h-80
             rounded-xl
             shadow-lg
             shrink-0
