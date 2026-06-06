@@ -1,28 +1,28 @@
 import { useParams } from "react-router-dom";
 import { plants } from "./plantsData";
 import { useTranslation } from "react-i18next";
-
-function Quran() {
-  const { id } = useParams();
+/*dfsdfds*/
+function Propagation() {
   const { t } = useTranslation();
   const { i18n } = useTranslation();
+  const { id } = useParams();
+
   const plant = plants.find((p) => p.id === Number(id));
 
   if (!plant) {
-    return <div className="p-4">{t("plantNotFound")}</div>;
+    return <div className="p-4"> {t("plantNotFound")}</div>;
   }
+
   return (
-      <div className="min-h-screen bg-emerald-500 p-4 md:p-8 pb-28 flex justify-center">
-
-      <div className="w-full mt-10">
-
+    <div className="min-h-screen bg-emerald-500 p-4 md:p-8 pb-28  flex justify-center">
+      <div className="w-full mt-10 ">
         {/* TITLE */}
-        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl text-green-950 mb-6 ">
-          {t("quran")}
+        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl text-green-950 mb-6">
+          {t("propagation")}
         </h1>
 
         {/* HEADER CARD */}
-         {/* HEADER CARD - FULL WIDTH */}
+        {/* HEADER CARD - FULL WIDTH */}
         <div
           className="
         w-full
@@ -35,10 +35,10 @@ function Quran() {
     gap-6
       "
         >
-         <img
-  src={plant.image}
-  alt={t(plant.nameKey)}
-  className="
+          <img
+            src={plant.image}
+            alt={t(plant.nameKey)}
+            className="
      w-full
     max-w-md
     h-auto
@@ -47,7 +47,7 @@ function Quran() {
     shadow-lg
     mx-auto
   "
-/>
+          />
 
           <div className={i18n.language === "ar" ? "text-center" : "text-center"}>
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">
@@ -62,20 +62,17 @@ function Quran() {
 
         {/* CONTENT */}
         <div className="bg-green-950 text-white rounded-2xl p-6 md:p-8 mt-6">
-
           <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mb-4">
-            {t("quran")}
+            {t("propagation")}
           </h3>
-<div className="w-full h-px bg-white/30 my-6" />
+          <div className="w-full h-px bg-white/30 my-6" />
           <p className="text-sm md:text-base lg:text-lg leading-7 md:leading-8 whitespace-pre-line">
-            {t("plant_silq_quran")}
+            {t("plant_silq_propagation")}
           </p>
-
         </div>
-
       </div>
     </div>
-  )
+  );
 }
 
-export default Quran
+export default Propagation;

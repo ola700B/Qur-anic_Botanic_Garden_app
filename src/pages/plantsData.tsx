@@ -9,6 +9,16 @@ export const plants = [
       italic: "Beta vulgaris",
       author: "L",
     },
+    Synonyms: [
+  {
+    italic: "Beta altissima",
+    author: "Steud."
+  },
+  {
+    italic: "Beta atriplicifolia",
+    author: "Rouy"
+  }
+],
     habitatKey: "plant_silq_habitat",
     descriptionKey: "plant_silq_description",
     usesKey: "plant_silq_uses",

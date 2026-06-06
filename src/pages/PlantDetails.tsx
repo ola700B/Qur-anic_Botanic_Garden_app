@@ -107,7 +107,7 @@ function PlantDetails() {
 "
         >
           <button
-            onClick={() => navigate(`/habitat/${id}`)}
+            onClick={() => navigate(`/quran/${id}`)}
             className="
               py-6
               rounded-xl
@@ -120,8 +120,9 @@ function PlantDetails() {
               lg:text-2xl
 "
           >
-            {t("habitat")}
+            {t("quran")}
           </button>
+          
 
           <button
             onClick={() => navigate(`/description/${id}`)}
@@ -142,7 +143,7 @@ function PlantDetails() {
           </button>
 
           <button
-            onClick={() => navigate(`/uses/${id}`)}
+            onClick={() => navigate(`/propagation/${id}`)}
             className="
               py-6
               rounded-xl
@@ -155,11 +156,11 @@ function PlantDetails() {
               lg:text-2xl
 "
           >
-            {t("uses")}
+            {t("propagation")}
           </button>
 
           <button
-            onClick={() => navigate(`/quran/${id}`)}
+            onClick={() => navigate(`/habitat/${id}`)}
             className="
               py-6
               rounded-xl
@@ -172,7 +173,7 @@ function PlantDetails() {
               lg:text-2xl
 "
           >
-            {t("quran")}
+            {t("habitat")}
           </button>
         </div>
       </div>

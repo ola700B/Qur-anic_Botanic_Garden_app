@@ -10,62 +10,123 @@ function Description() {
 
   if (!plant) {
     return (
-      <div className="p-4">
+      <div
+        className="
+          p-4
+"
+      >
         {t("plantNotFound")}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-emerald-500 p-4 md:p-8 pb-28">
-      <div className="w-full mt-10">
-
+    <div
+      className="
+        min-h-screen
+        p-4
+        pb-28
+        bg-emerald-500
+        md:p-8
+"
+    >
+      <div
+        className="
+          w-full
+          mt-10
+"
+      >
         {/* TITLE */}
-        <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl text-green-950 mb-6">
+        <h1
+          className="
+            mb-6
+            text-2xl text-green-950 font-bold
+            md:text-3xl
+            lg:text-4xl
+"
+        >
           {t("description")}
         </h1>
 
-        {/* HEADER CARD */}
+        {/* HEADER CARD - FULL WIDTH */}
         <div
-          className={`
-            w-full
-            bg-green-950
-            text-white
-            rounded-2xl
-            p-6 md:p-8
-            flex flex-row
-            items-center
-            gap-6
-             ${i18n.language === "ar" ? "direction-rtl" : ""}
-          `}
+          className="
+        w-full
+    bg-green-950
+    text-white
+    rounded-2xl
+    p-4 md:p-8
+    flex flex-col 
+    items-center
+    gap-6
+      "
         >
           <img
             src={plant.image}
-            alt={plant.nameKey}
-            className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 rounded-xl shadow-lg shrink-0"
+            alt={t(plant.nameKey)}
+            className="
+     w-full
+    max-w-md
+    h-auto
+    object-contain
+    rounded-xl
+    shadow-lg
+    mx-auto
+  "
           />
 
-          <div>
-            <h2 className="font-bold text-xl md:text-2xl lg:text-3xl">
+          <div
+            className={i18n.language === "ar" ? "text-center" : "text-center"}
+          >
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">
               {t(plant.nameKey)}
             </h2>
 
-            <p className="text-sm md:text-lg lg:text-xl mt-2">
+            <p className="mt-2 text-sm md:text-xl lg:text-2xl">
               <i>{plant.scientificName.italic}</i> {plant.scientificName.author}
             </p>
           </div>
         </div>
 
         {/* DESCRIPTION CARD */}
-        <div className="w-full bg-green-950 text-white rounded-2xl p-6 md:p-8 mt-6">
-
-          <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mb-4">
+        <div
+          className="
+            w-full
+            p-6
+            mt-6
+            rounded-2xl
+            text-white
+            bg-green-950
+            md:p-8
+"
+        >
+          <h3
+            className="
+              mb-4
+              text-xl font-bold
+              md:text-2xl
+              lg:text-3xl
+"
+          >
             {t("description")}
           </h3>
 
-          <div className="w-full h-px bg-white/30 my-6" />
+          <div
+            className="
+              w-full h-px
+              my-6
+              bg-white/30
+"
+          />
 
-          <div className="space-y-3 text-sm md:text-base lg:text-lg leading-7 md:leading-8">
+          <div
+            className="
+              space-y-3
+              text-sm leading-7
+              md:text-base md:leading-8
+              lg:text-lg
+"
+          >
             {t(plant.descriptionKey)
               .split("\n")
               .map((line, i) => {
@@ -74,7 +135,13 @@ function Description() {
                 if (rest.length) {
                   return (
                     <p key={i}>
-                      <span className="font-bold">{label}:</span>{" "}
+                      <span
+                        className="
+                          font-bold
+"
+                      >
+                        {label}:
+                      </span>{" "}
                       {rest.join(":")}
                     </p>
                   );
@@ -84,7 +151,60 @@ function Description() {
               })}
           </div>
         </div>
+        <div className="bg-green-950 text-white rounded-2xl p-6 md:p-8 mt-6">
+            <span className="font-bold text-lg md:text-xl lg:text-2xl">
+    {t("synonyms")}:
+  </span>
 
+  <span className="text-sm md:text-lg lg:text-xl">
+    {plant.Synonyms.map((name, index) => (
+      <span key={index}>
+        <i>{name.italic}</i> {name.author}
+        {index < plant.Synonyms.length - 1 ? "; " : ""}
+      </span>
+    ))}
+  </span>
+
+          <div
+            className="
+              w-full h-px
+              my-4
+              bg-white/30
+"
+          />
+          <p className="text-sm md:text-base lg:text-lg leading-7 md:leading-8">
+            <span className="font-bold text-lg md:text-xl lg:text-2xl">
+              {t("family")}:
+            </span>{" "}
+            {t("plant_silq_family")}
+          </p>
+          <div
+            className="
+              w-full h-px
+              my-4
+              bg-white/30
+"
+          />
+           <p className="text-sm md:text-base lg:text-lg leading-7 md:leading-8">
+            <span className="font-bold text-lg md:text-xl lg:text-2xl">
+              {t("order")}:
+            </span>{" "}
+            {t("plant_silq_order")}
+          </p>
+          <div
+            className="
+              w-full h-px
+              my-4
+              bg-white/30
+"
+          />
+          <p className="text-sm md:text-base lg:text-lg leading-7 md:leading-8">
+            <span className="font-bold text-lg md:text-xl lg:text-2xl">
+              {t("uses")}:
+            </span>{" "}
+            {t("plant_silq_uses")}
+          </p>
+        </div>
       </div>
     </div>
   );

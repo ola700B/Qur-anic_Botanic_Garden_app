@@ -1,7 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
+import { HashRouter } from "react-router-dom";
 import Home from "./pages/home";
 import Plants from "./pages/plants";
 import Memory_game from "./games/memory_game";
@@ -15,6 +15,7 @@ import FlowerEffect from "./components/flowerEffect";
 import GameList from "./pages/gamesList";
 import MemoryLevel from "./pages/memoryLevel";
 import Plant_sort from "./games/plant_sort";
+import Propagation from "./pages/propagation";
 
 function DirectionProvider() {
   const { i18n } = useTranslation();
@@ -35,7 +36,7 @@ function App() {
       <DirectionProvider />
 
       <FlowerEffect>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Home />} />
 
@@ -47,13 +48,14 @@ function App() {
               <Route path="/description/:id" element={<Description />} />
               <Route path="/uses/:id" element={<Uses />} />
               <Route path="/quran/:id" element={<Quran />} />
+              <Route path="/propagation/:id" element={<Propagation/>} />
               <Route path="/gamesList" element={<GameList />} />
               <Route path="/memoryLevel" element={<MemoryLevel />} />
               <Route path="/plant_sort" element={<Plant_sort/>} />
 
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </FlowerEffect>
     </>
   );

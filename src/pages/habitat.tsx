@@ -33,30 +33,30 @@ function Habitat() {
         <div
           className="
         w-full
-        bg-green-950
-        text-white
-        rounded-2xl
-        p-6 md:p-8
-        flex flex-row
-        items-center
-        gap-6
+    bg-green-950
+    text-white
+    rounded-2xl
+    p-4 md:p-8
+    flex flex-col 
+    items-center
+    gap-6
       "
         >
-          <img
-            src={plant.image}
-            alt={t(plant.nameKey)}
-            className="
-            
-            sm:w-36 sm:h-36
-            md:w-72 md:h-72
-            lg:w-80 lg:h-80
-            rounded-xl
-            shadow-lg
-            shrink-0
-          "
-          />
+         <img
+  src={plant.image}
+  alt={t(plant.nameKey)}
+  className="
+     w-full
+    max-w-md
+    h-auto
+    object-contain
+    rounded-xl
+    shadow-lg
+    mx-auto
+  "
+/>
 
-          <div className={i18n.language === "ar" ? "text-right" : "text-left"}>
+          <div className={i18n.language === "ar" ? "text-center" : "text-left"}>
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">
               {t(plant.nameKey)}
             </h2>

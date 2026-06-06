@@ -30,9 +30,14 @@ i18n
           search: "Search",
           plantNotFound: "Plant not found",
           habitat: "Habitat & Distribution",
-          description: "Description",
+          description: "Botanical Description",
           uses: "Uses",
           quran: "Qur'an & Hadith",
+          family: "Family",
+          synonyms: "Synonyms",
+          order: "Order",
+          propagation: "Propagation",
+
           plant_sidr: "Sidr",
           plant_silq: "Beet",
           plant_olive: "Olive",
@@ -50,6 +55,10 @@ i18n
           plant_silq_uses: "Culinary.",
           plant_silq_quran: `Sahl ibn Saad narrates (via Abu Hazim): “We used to celebrate on Fridays. We knew an elderly woman who would take the roots of chard (silq), put them in her pot, and add a few grains of barley. When we had performed the Friday prayer, we would visit her, and she would offer it to us. We celebrated Fridays for that. We would not have lunch or our midday rest except after the Friday prayers. By Allah, there was neither fat nor oil in it.”
           (Ṣaḥīḥ al-Bukhārī)`,
+          plant_silq_family: "Amaranthaceae ",
+          plant_silq_order: "Caryophyllales",
+          plant_silq_propagation:
+            "It is propagated almost exclusively by seeds, with commercial cultivars sown directly in fields. It is a biennial plant, producing seeds in the second year after exposure to cold (vernalization). Vegetative propagation is generally not used; thus, seeds remain the main means of propagation.",
           games: {
             title: "Games",
             memory: "Memory Game",
@@ -107,19 +116,23 @@ i18n
           clear: "مسح",
           search: "بحث",
           plantNotFound: "النبتة غير موجودة",
-          habitat: "الموطن والتوزيع",
-          description: "الوصف",
+          habitat: "التوزيع والموطن",
+          description: "الوصف النباتي",
           uses: "الاستخدامات",
           quran: "القرآن والحديث",
-
+          family: "العائلة",
+          order: "الرتبة",
+          synonyms: "المرادفات",
+          propagation: "الإكثار",
           plant_sidr: "السدر",
           plant_silq: "السلق",
           plant_olive: "الزيتون",
           plant_wheat: "القمح",
 
-          plant_silq_habitat: "موطنها الأصلي: الجزائر، ودول الخليج، والكويت، ومصر، والعراق، ولبنان وسوريا، وليبيا، والمغرب، وجزر الأزور، وجزر البليار، وألبانيا، وبلجيكا، وبلغاريا، وجزر الكناري، وكورسيكا، وقبرص، وجزر بحر إيجة الشرقي، وفرنسا، وألمانيا، وبريطانيا العظمى، واليونان، والهند، وإيران، وأيرلندا، وإيطاليا. وتزرع على نطاق واسع.",
+          plant_silq_habitat:
+            "موطنها الأصلي: الجزائر، ودول الخليج، والكويت، ومصر، والعراق، ولبنان وسوريا، وليبيا، والمغرب، وجزر الأزور، وجزر البليار، وألبانيا، وبلجيكا، وبلغاريا، وجزر الكناري، وكورسيكا، وقبرص، وجزر بحر إيجة الشرقي، وفرنسا، وألمانيا، وبريطانيا العظمى، واليونان، والهند، وإيران، وأيرلندا، وإيطاليا. وتزرع على نطاق واسع.",
 
-         plant_silq_description: `عشبة حولية منتصبة، معمرة أحيانًا، ارتفاعها حوالي 0.3 - 0.5 متر، ذات سيقان مجعدة جرداء.
+          plant_silq_description: `عشبة حولية منتصبة، معمرة أحيانًا، ارتفاعها حوالي 0.3 - 0.5 متر، ذات سيقان مجعدة جرداء.
 
 الأوراق: نصل الورقة أحمر داكن إلى أخضر، عادةً ما يكون له عرق وسطي بارز، وسميك بعض الشيء. طول عنق الورقة ½-½/3 أو ما يعادل طول النصل.
 
@@ -131,8 +144,12 @@ i18n
 
           plant_silq_uses: "الطهي",
 
-          plant_silq_quran: "عَنْ أَبِي حَازِمٍ، عَنْ سَهْلِ بْنِ سَعْدٍ، قَالَ إِنْ كُنَّا لَنَفْرَحُ بِيَوْمِ الْجُمُعَةِ، كَانَتْ لَنَا عَجُوزٌ تَأْخُذُ أُصُولَ السِّلْقِ، فَتَجْعَلُهُ فِي قِدْرٍ لَهَا، فَتَجْعَلُ فِيهِ حَبَّاتٍ مِنْ شَعِيرٍ، إِذَا صَلَّيْنَا زُرْنَاهَا فَقَرَّبَتْهُ إِلَيْنَا، وَكُنَّا نَفْرَحُ بِيَوْمِ الْجُمُعَةِ مِنْ أَجْلِ ذَلِكَ، وَمَا كُنَّا نَتَغَدَّى وَلاَ نَقِيلُ إِلاَّ بَعْدَ الْجُمُعَةِ، وَاللَّهِ مَا فِيهِ شَحْمٌ وَلاَ وَدَكٌ‏.‏ (صَحِيحُ البُخَارِيِّ)",
-
+          plant_silq_quran:
+            "عَنْ أَبِي حَازِمٍ، عَنْ سَهْلِ بْنِ سَعْدٍ، قَالَ إِنْ كُنَّا لَنَفْرَحُ بِيَوْمِ الْجُمُعَةِ، كَانَتْ لَنَا عَجُوزٌ تَأْخُذُ أُصُولَ السِّلْقِ، فَتَجْعَلُهُ فِي قِدْرٍ لَهَا، فَتَجْعَلُ فِيهِ حَبَّاتٍ مِنْ شَعِيرٍ، إِذَا صَلَّيْنَا زُرْنَاهَا فَقَرَّبَتْهُ إِلَيْنَا، وَكُنَّا نَفْرَحُ بِيَوْمِ الْجُمُعَةِ مِنْ أَجْلِ ذَلِكَ، وَمَا كُنَّا نَتَغَدَّى وَلاَ نَقِيلُ إِلاَّ بَعْدَ الْجُمُعَةِ، وَاللَّهِ مَا فِيهِ شَحْمٌ وَلاَ وَدَكٌ‏.‏ (صَحِيحُ البُخَارِيِّ)",
+          plant_silq_family: "القطيفية أو الرمرامية",
+          plant_silq_order: "القرنفليات ",
+          plant_silq_propagation:"يتكاثر حصريًا تقريبًا بالبذور، حيث تُزرع الأصناف التجارية مباشرة في الحقول. وهو نبات ثنائي الحول، إذ يُنتج البذور في السنة الثانية بعد التعرض للبرودة، ولا يُستخدم فيه الإكثار الخضري بشكل عام، لذا تبقى البذور الوسيلة الأساسية للإكثار.",
+          plant_silq_synonyms:"Beta altissimaSteud.; Beta atriplicifolia Rouy",
           games: {
             title: "الألعاب",
             memory: "لعبة الذاكرة",
