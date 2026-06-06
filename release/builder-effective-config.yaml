@@ -1,0 +1,16 @@
+directories:
+  output: release
+  buildResources: build
+appId: com.plants.app
+productName: Plants Project
+files:
+  - filter:
+      - dist/**/*
+      - electron/**/*
+      - package.json
+win:
+  target: nsis
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+electronVersion: 42.3.3
