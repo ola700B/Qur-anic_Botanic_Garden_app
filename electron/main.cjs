@@ -5,8 +5,8 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1280,
         height: 800,
-        autoHideMenuBar: true,
         fullscreen: true,
+        autoHideMenuBar: true,
     });
 
     win.loadFile(path.join(__dirname, "../dist/index.html"));
